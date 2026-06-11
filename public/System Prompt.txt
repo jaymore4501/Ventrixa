@@ -1,0 +1,884 @@
+# Ventrixa — Master System Prompt & Product Blueprint
+
+## Product Name
+
+Ventrixa
+
+## Product Category
+
+AI Website Operating System
+
+## Core Vision
+
+Ventrixa is a next-generation AI-powered Website Operating System that enables users to transform an idea, business, startup, portfolio, agency, product, service, or personal brand into a fully functional, responsive, customizable, SEO-optimized, and deployable website within minutes.
+
+Ventrixa is not simply a website builder.
+
+It combines:
+
+* AI Website Generation
+* AI Branding
+* Visual Website Editing
+* Template Marketplace
+* Drag-and-Drop Website Building
+* AI Content Generation
+* AI Image Generation
+* Domain Management
+* One-Click Deployment
+
+into a single unified platform.
+
+The user should feel as if they are operating an entire web creation operating system rather than using a traditional website builder.
+
+---
+
+# Design Philosophy
+
+Ventrixa must feel:
+
+* Premium
+* Futuristic
+* Elegant
+* Professional
+* Modern
+* AI-Native
+* Enterprise Ready
+
+The experience should resemble a blend of:
+
+* Notion
+* Framer
+* Vercel
+* Linear
+* Figma
+* Webflow
+
+while maintaining its own unique identity.
+
+---
+
+Design System
+Dark Theme
+Token	Value
+Background	#151821
+Card	#212632
+Border	#394253
+Primary	#FF2E6E
+Hover	#FF4E87
+Heading	#FFFFFF
+Body	#D6DAE2
+Muted	#96A0B3
+Primary Gradient
+background: linear-gradient(
+135deg,
+#FF2E6E,
+#E02A66
+);
+Light Theme
+Token	Value
+Background	#FFFFFF
+Surface	#F8FAFC
+Card	#FFFFFF
+Border	#E2E8F0
+Primary	#FF2E6E
+Heading	#0F172A
+Body	#334155
+Muted	#64748B
+---
+
+# Typography System
+
+## Heading Font
+
+Inter
+
+Weights:
+
+* 600
+* 700
+* 800
+
+---
+
+## Body Font
+
+Inter
+
+Weights:
+
+* 400
+* 500
+
+---
+
+## UI Font
+
+Inter
+
+Weights:
+
+* 500
+* 600
+
+
+---
+
+ReactBits UI Component System
+
+Ventrixa should use ReactBits heavily to create a premium AI-native experience.
+
+Official source:
+
+ReactBits
+
+ShinyText
+
+Install:
+
+npx shadcn@latest add @react-bits/ShinyText-JS-CSS
+
+Use For:
+
+Hero Headlines
+Product Announcements
+AI Generation Headlines
+CTA Highlights
+ScrollVelocity
+
+Install:
+
+npx shadcn@latest add @react-bits/ScrollVelocity-JS-CSS
+
+Use For:
+
+Announcement Bars
+Partner Sections
+Dynamic Marketing Areas
+ScrollReveal
+
+Install:
+
+npx shadcn@latest add @react-bits/ScrollReveal-JS-CSS
+
+Use For:
+
+Feature Sections
+Testimonials
+Dashboard Cards
+Landing Page Animations
+LogoLoop
+
+Install:
+
+npx shadcn@latest add @react-bits/LogoLoop-JS-CSS
+
+Use For:
+
+Partner Logos
+Client Logos
+Integrations Showcase
+LaserFlow
+
+Install:
+
+npx shadcn@latest add @react-bits/LaserFlow-JS-CSS
+
+Use For:
+
+Dashboard Backgrounds
+Hero Visual Effects
+AI Generation Pages
+GradualBlur
+
+Install:
+
+npx shadcn@latest add @react-bits/GradualBlur-JS-CSS
+
+Use For:
+
+Floating Panels
+Modals
+Dashboard Widgets
+Glassmorphism Effects
+Template Gallery System
+ChromaGrid
+
+Install:
+
+npx shadcn@latest add @react-bits/ChromaGrid-JS-CSS
+
+Purpose:
+
+Template Marketplace Layout
+
+Categories:
+
+Business
+SaaS
+Agency
+Startup
+Restaurant
+Portfolio
+Personal
+Blog
+Premium Interactive Cards
+BorderGlow
+
+Install:
+
+npx shadcn@latest add @react-bits/BorderGlow-JS-CSS
+
+Use For:
+
+Pricing Cards
+Template Cards
+AI Generation Cards
+Upgrade Plans
+
+Design Rules:
+
+Border Radius: 28px
+Soft Interactive Glow
+Premium Hover State
+Consistent With Brand Gradient
+
+Preferred Colors:
+
+#c084fc
+#f472b6
+#38bdf8
+Background System
+LightRays
+
+Use as the primary visual effect for:
+
+Landing Page Hero
+Dashboard Hero
+AI Generation Screens
+Authentication Screens
+
+Primary Configuration:
+
+<LightRays
+  raysOrigin="top-center"
+  raysColor="#FF2E6E"
+  raysSpeed={1}
+  lightSpread={0.5}
+  rayLength={3}
+  followMouse={true}
+  mouseInfluence={0.1}
+  noiseAmount={0}
+  distortion={0}
+  pulsating={false}
+  fadeDistance={1}
+  saturation={1}
+/>
+
+Requirements:
+
+Mobile Optimized
+GPU Accelerated
+Non-Blocking
+Smooth 60fps Rendering
+Disable on Low-Power Devices
+
+---
+
+Website Creation Modes
+AI Website Generation
+
+User describes:
+
+I run a digital marketing agency.
+I want a premium website.
+Black and orange branding.
+Services, blog, pricing, contact.
+
+Ventrixa generates:
+
+Branding
+Pages
+Content
+Images
+SEO
+Layout
+Template Mode
+
+User chooses:
+
+Business
+Startup
+Portfolio
+Agency
+Restaurant
+Blog
+
+Then customizes.
+
+Blank Canvas Mode
+
+User creates manually using:
+
+Drag-and-Drop Components
+Visual Editor
+Theme Builder
+Core Promise
+
+Ventrixa must always deliver:
+
+"Describe your idea, choose a style, customize your vision, and Ventrixa will build, brand, optimize, and deploy a fully responsive website automatically."
+
+---
+
+# Frontend Stack
+
+* Next.js 15
+* React 19
+* TypeScript
+* TailwindCSS
+* Shadcn UI
+* Framer Motion
+* React Query
+* Zustand
+* React Hook Form
+* Zod
+
+---
+
+# Backend Stack
+
+* Next.js API Routes
+* Node.js
+* TypeScript
+
+---
+
+# Database
+
+MongoDB Atlas
+
+Collections:
+
+* users
+* projects
+* websites
+* pages
+* sections
+* assets
+* deployments
+* domains
+* subscriptions
+
+---
+
+# Authentication
+
+NextAuth.js
+
+Providers:
+
+* Google OAuth
+* Email Magic Link
+
+Future:
+
+* GitHub
+* Microsoft
+
+---
+
+# AI Layer
+
+OpenAI
+
+Responsible For:
+
+* Website Generation
+* Branding Generation
+* Content Generation
+* SEO Generation
+* Page Generation
+* Theme Generation
+
+---
+
+# Image Generation
+
+Supported Providers
+
+* OpenAI Images
+* Flux
+
+Generate:
+
+* Hero Images
+* Product Images
+* Illustrations
+* Team Images
+* Background Images
+* Marketing Graphics
+
+---
+
+# Website Creation Modes
+
+## AI Generation Mode
+
+User describes website.
+
+Ventrixa builds everything automatically.
+
+---
+
+## Template Mode
+
+User selects a prebuilt template.
+
+Then customizes.
+
+---
+
+## Blank Canvas Mode
+
+User starts from scratch.
+
+Uses drag-and-drop editor.
+
+---
+
+# Website Creation Wizard
+
+## Step 1
+
+Project Information
+
+Fields:
+
+* Website Name
+* Website Description
+* Business Type
+* Industry
+* Target Audience
+
+---
+
+## Step 2
+
+Brand Identity
+
+User selects:
+
+### Color Palette
+
+Options:
+
+* AI Generated
+* Manual Selection
+
+---
+
+### Typography
+
+Options:
+
+* Modern
+* Professional
+* Startup
+* Luxury
+* Creative
+* Minimal
+
+---
+
+### Brand Voice
+
+Options:
+
+* Professional
+* Friendly
+* Bold
+* Corporate
+* Luxury
+* Playful
+
+---
+
+### Logo
+
+AI generates multiple logo concepts.
+
+User can:
+
+* Regenerate
+* Modify
+* Replace
+* Customize
+
+until satisfied.
+
+---
+
+## Step 3
+
+Page Selection
+
+Checkbox System
+
+Pages:
+
+* Home
+* About
+* Services
+* Portfolio
+* Pricing
+* Blog
+* Contact
+* FAQ
+* Team
+* Gallery
+* Privacy Policy
+* Terms
+
+Only selected pages are generated.
+
+---
+
+## Step 4
+
+Design Selection
+
+Options:
+
+* Modern
+* Minimal
+* Luxury
+* Startup
+* Corporate
+* Creative
+* Futuristic
+* Dark
+* Light
+
+---
+
+## Step 5
+
+Generate Website
+
+Ventrixa generates:
+
+* Branding
+* Pages
+* Content
+* Images
+* SEO
+* Layout
+
+---
+
+# Section Engine
+
+AI MUST NEVER generate raw HTML.
+
+AI MUST generate structured JSON.
+
+Example:
+
+```json
+{
+  "type": "hero",
+  "variant": "modern",
+  "props": {
+    "title": "Launch Your Business",
+    "subtitle": "AI-powered website creation."
+  }
+}
+```
+
+React Components render JSON.
+
+Benefits:
+
+* Security
+* Performance
+* Maintainability
+* Scalability
+
+---
+
+# Component Library
+
+Supported Components
+
+* Navbar
+* Hero
+* Features
+* Benefits
+* Services
+* Pricing
+* Testimonials
+* FAQ
+* Team
+* Portfolio
+* Gallery
+* Blog
+* Contact
+* CTA
+* Footer
+* Timeline
+* Stats
+* Logos
+* Forms
+
+Each component must support:
+
+* Variants
+* Themes
+* Customization
+* Responsive Layouts
+
+---
+
+# Visual Editor
+
+User can edit:
+
+* Text
+* Images
+* Colors
+* Layouts
+* Sections
+* Buttons
+* Typography
+* Spacing
+
+Features:
+
+* Drag-and-Drop
+* Undo / Redo
+* Duplicate Section
+* Delete Section
+* Rearrange Sections
+
+---
+
+# Deployment System
+
+One Click Deploy
+
+Subdomain:
+
+project.Ventrixa.site
+
+Custom Domain:
+
+project.com
+
+Features:
+
+* SSL
+* Automatic Deployments
+* Version History
+* Rollbacks
+
+---
+
+# ReactBits Integration
+
+Ventrixa must heavily utilize ReactBits components to achieve a premium visual experience.
+
+---
+
+## Hero Sections
+
+Use:
+
+ShinyText
+
+Purpose:
+
+* Hero Headings
+* CTA Text
+* Product Highlights
+
+---
+
+## Scroll Experience
+
+Use:
+
+ScrollVelocity
+
+Purpose:
+
+* Marketing Sections
+* Announcement Banners
+* Testimonials
+
+---
+
+## Content Reveal
+
+Use:
+
+ScrollReveal
+
+Purpose:
+
+* Section Animations
+* Content Appearances
+
+---
+
+## Trusted Brands Section
+
+Use:
+
+LogoLoop
+
+Purpose:
+
+* Client Logos
+* Integrations
+* Partners
+
+---
+
+## Background Effects
+
+Use:
+
+LaserFlow
+
+Purpose:
+
+* Hero Background
+* Dashboard Visual Effects
+
+---
+
+## Blur Effects
+
+Use:
+
+GradualBlur
+
+Purpose:
+
+* Floating Cards
+* Modals
+* Dashboard Widgets
+
+---
+
+# Templates Page
+
+Use:
+
+ChromaGrid
+
+Purpose:
+
+Template Showcase Grid
+
+Categories:
+
+* SaaS
+* Agency
+* Portfolio
+* Restaurant
+* Startup
+* Business
+* Personal
+* Ecommerce
+
+---
+
+# Premium Cards
+
+Use:
+
+BorderGlow
+
+Purpose:
+
+* Template Cards
+* Pricing Cards
+* AI Generation Cards
+
+Design Requirements:
+
+* Rounded Corners
+* Soft Hover Glow
+* Interactive Feedback
+
+---
+
+# Global Background System
+
+Use:
+
+LightRays
+
+Purpose:
+
+* Landing Page Background
+* Hero Sections
+* Dashboard Hero
+
+Configuration:
+
+```tsx
+raysColor="#FF2E6E"
+raysOrigin="top-center"
+followMouse={true}
+lightSpread={0.5}
+rayLength={3}
+```
+
+Requirements:
+
+* Optimized Performance
+* Mobile Compatible
+* Smooth Interaction
+* Non-intrusive Animation
+
+---
+
+# User Experience Requirements
+
+Every interaction must feel:
+
+* Instant
+* Fluid
+* Predictable
+* Professional
+
+Animation Duration:
+
+```css
+150ms - 300ms
+```
+
+Maximum Loading Delay:
+
+```css
+< 2 seconds
+```
+
+Skeletons Required:
+
+* Dashboard
+* Templates
+* AI Generation
+* Editor
+
+---
+
+# Core Product Promise
+
+Ventrixa must deliver on one promise:
+
+"Describe your idea, customize your vision, and Ventrixa will build, brand, optimize, and deploy your website automatically."
+
+Every design decision, feature, workflow, and system architecture choice must reinforce this promise.
