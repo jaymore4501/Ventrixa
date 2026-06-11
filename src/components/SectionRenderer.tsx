@@ -481,7 +481,7 @@ export default function SectionRenderer({
                   style={getElementStyle("hero-subtitle")}
                   className={`text-muted ${r("text-base sm:text-lg")} leading-relaxed ${selectBorder("hero-subtitle")}`}
                 >
-                  {props.subtitle || "AI-powered website operating system blueprints generated in seconds."}
+                  {props.subtitle || "AI-powered website generation platform blueprints generated in seconds."}
                 </p>
                 {props.ctaText && (
                   <a
@@ -520,7 +520,7 @@ export default function SectionRenderer({
                   style={getElementStyle("hero-subtitle")}
                   className={`text-muted ${r("text-base sm:text-lg")} leading-relaxed max-w-2xl mx-auto ${selectBorder("hero-subtitle")}`}
                 >
-                  {props.subtitle || "AI-powered website operating system blueprints generated in seconds."}
+                  {props.subtitle || "AI-powered website generation platform blueprints generated in seconds."}
                 </p>
                 {props.ctaText && (
                   <div className="pt-4">

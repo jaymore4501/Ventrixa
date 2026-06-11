@@ -2,7 +2,7 @@
 
 ## 1. Executive Summary
 
-Ventrixa is an AI-powered Website Operating System that enables individuals, startups, agencies, businesses, creators, and professionals to create, customize, manage, and deploy fully functional websites without requiring coding skills.
+Ventrixa is an AI-powered Website Generation Platform that enables individuals, startups, agencies, businesses, creators, and professionals to create, customize, manage, and deploy fully functional websites without requiring coding skills.
 
 Unlike traditional website builders that depend heavily on manual design and configuration, Ventrixa combines Artificial Intelligence, visual editing, branding generation, content generation, template systems, and one-click deployment into a unified platform.
 
@@ -25,7 +25,7 @@ Ventrixa aims to reduce website creation time from days or weeks to minutes whil
 
 # 2. Vision Statement
 
-Ventrixa aims to become the operating system for website creation.
+Ventrixa aims to become the generation platform for website creation.
 
 The platform's vision is:
 

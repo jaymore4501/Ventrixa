@@ -6,11 +6,11 @@ Ventrixa
 
 ## Product Category
 
-AI Website Operating System
+AI Website Generation Platform
 
 ## Core Vision
 
-Ventrixa is a next-generation AI-powered Website Operating System that enables users to transform an idea, business, startup, portfolio, agency, product, service, or personal brand into a fully functional, responsive, customizable, SEO-optimized, and deployable website within minutes.
+Ventrixa is a next-generation AI-powered Website Generation Platform that enables users to transform an idea, business, startup, portfolio, agency, product, service, or personal brand into a fully functional, responsive, customizable, SEO-optimized, and deployable website within minutes.
 
 Ventrixa is not simply a website builder.
 
@@ -28,7 +28,7 @@ It combines:
 
 into a single unified platform.
 
-The user should feel as if they are operating an entire web creation operating system rather than using a traditional website builder.
+The user should feel as if they are operating an entire web creation platform rather than using a traditional website builder.
 
 ---
 

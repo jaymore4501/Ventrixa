@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ventrixa — AI Website Operating System",
+  title: "Ventrixa — AI Website Generation Platform",
   description: "Transform any business idea into a fully deployed, premium responsive website within minutes.",
 };
 

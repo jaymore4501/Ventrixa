@@ -351,7 +351,7 @@ export default function LandingPage() {
         <ScrollReveal duration={0.8} delay={0.08} yOffset={25}>
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.08] tracking-tighter max-w-5xl mx-auto flex flex-col items-center gap-1">
             <SplitText text="The Website" className="text-white font-extrabold" />
-            <ShinyText text="Operating System" baseColor="#FF2E6E" shineColor="#ffb3c6" className="font-black" />
+            <ShinyText text="Generation Platform" baseColor="#FF2E6E" shineColor="#ffb3c6" className="font-black" />
           </h1>
         </ScrollReveal>
 
@@ -740,7 +740,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2.5">
             <span className="text-white font-extrabold text-base">Ventr<span className="text-[#FF2E6E]">ixa</span></span>
-            <span>— AI Website Operating System</span>
+            <span>— AI Website Generation Platform</span>
           </div>
           <p>&copy; {new Date().getFullYear()} Ventrixa Inc. All rights reserved.</p>
         </div>

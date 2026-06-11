@@ -1,22 +1,23 @@
-# Ventrixa — AI Website Operating System
+# 🚀 Ventrixa — AI Website Generation Platform
 
 <div align="center">
   <img src="/public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 20%;" />
-  <p><strong>Bespoke, professional websites generated, customized, and deployed instantly via AI.</strong></p>
+  <p><strong>✨ Bespoke, professional websites generated, customized, and deployed instantly via AI. ✨</strong></p>
 
-  [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](package.json)
-  [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-  [![React Version](https://img.shields.io/badge/React-19-blue.svg)](package.json)
-  [![Next.js Version](https://img.shields.io/badge/Next.js-16.2.7-black.svg)](package.json)
-  [![Tailwind v4](https://img.shields.io/badge/Tailwind-v4.0.0-38bdf8.svg)](package.json)
+  [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge&logo=appveyor)](package.json)
+  [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=for-the-badge&logo=github)](https://github.com/jaymore4501/Ventrixa/actions)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+  [![React Version](https://img.shields.io/badge/React-19-blue.svg?style=for-the-badge&logo=react)](package.json)
+  [![Next.js Version](https://img.shields.io/badge/Next.js-16.2.7-black.svg?style=for-the-badge&logo=next.js)](package.json)
+  [![Tailwind v4](https://img.shields.io/badge/Tailwind-v4.0.0-38bdf8.svg?style=for-the-badge&logo=tailwindcss)](package.json)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 </div>
 
 ---
 
 ## 📋 Description
 
-**Ventrixa** is an AI-powered Website Operating System that simplifies website creation. Unlike traditional drag-and-drop builders that require manual layout setup, or generic AI code generators that produce hard-to-maintain code, Ventrixa uses a **data-driven blueprint model**. 
+**Ventrixa** is an AI-powered Website Generation Platform that simplifies website creation. Unlike traditional drag-and-drop builders that require manual layout setup, or generic AI code generators that produce hard-to-maintain code, Ventrixa uses a **data-driven blueprint model**. 
 
 By compiling user-provided brand voices, colors, and industry keywords into structured JSON configurations, Ventrixa creates professional, responsive, and SEO-optimized website pages instantly. It includes a visual live preview workspace editor, automated styling theme generators (both light and dark modes), and instant edge deployment simulations to subdomains.
 
@@ -36,14 +37,14 @@ By compiling user-provided brand voices, colors, and industry keywords into stru
 
 ## 🛠️ Tech Stack
 
-### Frontend
+### 💻 Frontend
 - **Framework**: [Next.js 16.2.7](https://nextjs.org/) (App Router & Turbopack)
 - **UI & Components**: [React 19](https://react.dev/), [Framer Motion](https://www.framer.com/motion/), [Lucide React](https://lucide.dev/), [ReactBits UI System](https://reactbits.dev/)
 - **Styling**: [TailwindCSS v4](https://tailwindcss.com/) & CSS Variables
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
 - **Forms & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
 
-### Backend & Database
+### ⚙️ Backend & Database
 - **API Runtime**: Next.js Server Actions & Edge API Routes
 - **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (Mongoose ODM)
 - **Mock Database Fallback**: File-system JSON storage (`src/data/mockDb.json`) for seamless local runs.
@@ -54,103 +55,34 @@ By compiling user-provided brand voices, colors, and industry keywords into stru
 
 ## 📁 Project Structure
 
-```
+Here are the most critical directories and files in the project:
+
+```text
 ventrixa/
-├── package.json
-├── tsconfig.json
-├── next.config.ts
-├── eslint.config.mjs
-├── postcss.config.mjs
-├── LICENSE
-├── README.md
-├── SystemOverview.md
-├── SystemPrompt.md
-├── ProjectDeployment.md
-├── public/
-│   ├── Favicon.png
-│   ├── Full logo.png
-│   ├── Logo.png
-│   └── (SVGs & assets)
+├── public/                 # Static assets (logos, images, SVGs)
 ├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── auth/
-│   │   │   │   ├── [...nextauth]/
-│   │   │   │   │   └── route.ts
-│   │   │   │   └── signup/
-│   │   │   │       └── route.ts
-│   │   │   ├── deploy/
-│   │   │   │   └── route.ts
-│   │   │   ├── generate/
-│   │   │   │   └── route.ts
-│   │   │   ├── ollama/
-│   │   │   │   └── models/
-│   │   │   │       └── route.ts
-│   │   │   ├── pages/
-│   │   │   │   └── [pageId]/
-│   │   │   │       └── sections/
-│   │   │   │           └── route.ts
-│   │   │   ├── projects/
-│   │   │   │   ├── [projectId]/
-│   │   │   │   │   ├── export/
-│   │   │   │   │   │   └── route.ts
-│   │   │   │   │   ├── pages/
-│   │   │   │   │   │   └── route.ts
-│   │   │   │   │   └── route.ts
-│   │   │   │   └── route.ts
-│   │   │   └── user/
-│   │   │       └── profile/
-│   │   │           └── route.ts
-│   │   ├── dashboard/
-│   │   │   ├── wizard/
-│   │   │   │   └── page.tsx
-│   │   │   └── page.tsx
-│   │   ├── editor/
-│   │   │   └── [projectId]/
-│   │   │       └── page.tsx
-│   │   ├── profile/
-│   │   │   └── page.tsx
-│   │   ├── sites/
-│   │   │   └── [subdomain]/
-│   │   │       └── page.tsx
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/
-│   │   ├── reactbits/
-│   │   │   ├── BorderGlow.css
-│   │   │   ├── BorderGlow.tsx
-│   │   │   ├── ChromaGrid.tsx
-│   │   │   ├── GradualBlur.tsx
-│   │   │   ├── LightRays.tsx
-│   │   │   ├── LogoLoop.tsx
-│   │   │   ├── Plasma.css
-│   │   │   ├── Plasma.tsx
-│   │   │   ├── ScrollReveal.tsx
-│   │   │   ├── ScrollVelocity.tsx
-│   │   │   ├── ShinyText.tsx
-│   │   │   └── SplitText.tsx
-│   │   ├── Providers.tsx
-│   │   └── SectionRenderer.tsx
-│   ├── data/
-│   │   ├── previews/
-│   │   └── mockDb.json
-│   ├── lib/
-│   │   ├── ai/
-│   │   │   └── generator.ts
-│   │   ├── db.ts
-│   │   ├── mongodb.ts
-│   │   ├── styles.ts
-│   │   └── templates.ts
-│   └── models/
-│       └── schemas.ts
+│   ├── app/                # Next.js App Router (Pages & API Routes)
+│   │   ├── api/            # Backend API Handlers (Auth, Deploy, Generate)
+│   │   ├── dashboard/      # User Workspace & AI Generator Wizard
+│   │   ├── editor/         # Live Visual Website Editor
+│   │   └── sites/          # Deployed Subdomain Previews
+│   ├── components/         # Reusable React UI Components & Magic UI
+│   ├── data/               # Mock DB & Templates
+│   ├── lib/                # Core Logic (AI generation, DB connections, styling)
+│   └── models/             # MongoDB Mongoose Schemas
+├── .env.example            # Environment variables template
+├── next.config.ts          # Next.js configuration
+├── package.json            # Project dependencies & scripts
+└── tailwind.config.ts      # Tailwind styling definitions (if applicable)
 ```
+
+*(Note: Other configuration files like `tsconfig.json`, `eslint.config.mjs`, etc., are included in the repository but omitted here for brevity.)*
 
 ---
 
 ## 🏛️ Architecture Summary
 
-```
+```text
                        ┌────────────────────────────────────────────────────────┐
                        │                       Frontend                         │
                        │             (Next.js App / Visual Editor)              │
@@ -198,8 +130,8 @@ The system operates on an **abstracted database provider framework**. When `MONG
 ### Step-by-Step Setup
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/ventrixa.git
-   cd ventrixa
+   git clone https://github.com/jaymore4501/Ventrixa.git
+   cd Ventrixa
    ```
 
 2. **Install project dependencies**:
@@ -224,11 +156,11 @@ The system operates on an **abstracted database provider framework**. When `MONG
 
 ## 🎯 Usage Guide
 
-### 1. Account Onboarding & Login
+### 1. 🔐 Account Onboarding & Login
 - Open [http://localhost:3000](http://localhost:3000) and click **Sign In** or **Build site for free**.
 - Create an account using credentials or click tab panels to sign in.
 
-### 2. Website Generation Wizard
+### 2. 🪄 Website Generation Wizard
 - Click **New Project** to start the onboarding wizard.
 - **Step 1 (Information)**: Enter the website name, description, industry, business type, and target audience. 
 - **Step 2 (Keywords)**: Input keywords related to the niche (e.g. `fashion`, `clothes`, `luxury`). Press `Enter` to lock keywords.
@@ -236,12 +168,12 @@ The system operates on an **abstracted database provider framework**. When `MONG
 - **Step 4 (Structure)**: Choose required page routes (e.g. `Home`, `About`, `Services`, `Pricing`).
 - **Step 5 (Compile)**: Confirm and watch the compile pipeline load styling coordinates, retrieve images, write SEO metatags, and output the website blueprint.
 
-### 3. Live Preview & Visual Editing
+### 3. 🖥️ Live Preview & Visual Editing
 - Inside the workspace dashboard, choose your website project to launch the visual editor.
 - Click any header text, feature title, pricing item, or layout block to modify properties.
 - Drag-and-drop sections or click buttons in the side inspector panel to re-order, duplicate, or delete sections.
 
-### 4. Deploying & Exporting Source Code
+### 4. 📤 Deploying & Exporting Source Code
 - Click **Publish** to make the site live instantly at a simulated subdomain (`subdomain.ventrixa.site`).
 - Click **Export Source Code** to download a production-ready Next.js zip file pre-packaged with all routes, page configurations, dynamic component renderers, CSS styling variables, and assets.
 

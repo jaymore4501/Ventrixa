@@ -128,7 +128,7 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-12">
           <div>
             <h1 className="text-3xl font-extrabold text-heading">Your Web Blueprints</h1>
-            <p className="text-muted text-sm mt-1.5">Manage, design, and deploy your custom-built operating system applications.</p>
+            <p className="text-muted text-sm mt-1.5">Manage, design, and deploy your custom-built generation platform applications.</p>
           </div>
 
           <button
