@@ -1,16 +1,18 @@
-# <img src="public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 24px;" /> Ventrixa — AI Website Generation Platform
+# <img src="public/Logo.png" alt="Ventrixa Logo" width="45" height="45" align="center" style="vertical-align: middle; border-radius: 8px; margin-right: 8px;" /> Ventrixa — AI Website Generation Platform
 
 <div align="center">
-  
-  **Transform ideas into production-ready websites in seconds.**
-  
-<p align="center">
-  <img src="https://img.shields.io/github/license/your-org/ventrixa?style=flat-square" />
-  <img src="https://img.shields.io/github/package-json/v/your-org/ventrixa?style=flat-square" />
-  <img src="https://img.shields.io/github/stars/your-org/ventrixa?style=flat-square" />
-  <img src="https://img.shields.io/github/issues/your-org/ventrixa?style=flat-square" />
-</p>
+
+**Transform ideas into production-ready websites in seconds.**
+
+[![AI Powered](https://img.shields.io/badge/AI-Powered-7C3AED?style=flat-square)](#)
+[![Next.js](https://img.shields.io/badge/Next.js-App_Router-000000?style=flat-square&logo=nextdotjs)](#)
+[![OpenAI](https://img.shields.io/badge/OpenAI-Supported-10A37F?style=flat-square&logo=openai)](#)
+[![Ollama](https://img.shields.io/badge/Ollama-Local_AI-000000?style=flat-square)](#)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Ready-47A248?style=flat-square&logo=mongodb)](#)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+
 **Built with:** Next.js · React · TypeScript · Tailwind CSS · OpenAI · Ollama
+
 </div>
 
 ---
