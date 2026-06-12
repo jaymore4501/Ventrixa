@@ -1,23 +1,21 @@
-# 🚀 Ventrixa — AI Website Generation Platform
+# <img src="public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 24px;" /> Ventrixa — AI Website Generation Platform
 
 <div align="center">
-  <img src="public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 24px;" />
   
-  ## ✨ Ventrixa ✨
+  **Transform ideas into production-ready websites in seconds.**
   
-  **Bespoke, professional websites generated, customized, and deployed instantly via AI.**
-  
-  [![Version](https://img.shields.io/badge/version-1.0.0-FF2E6E.svg?style=for-the-badge)](package.json)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-  [![React Version](https://img.shields.io/badge/React-19-blue.svg?style=for-the-badge&logo=react)](package.json)
-  [![Next.js Version](https://img.shields.io/badge/Next.js-16.2.7-000000.svg?style=for-the-badge&logo=nextdotjs)](package.json)
-  [![Tailwind v4](https://img.shields.io/badge/Tailwind-v4.0.0-38bdf8.svg?style=for-the-badge&logo=tailwindcss)](package.json)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+<p align="center">
+  <img src="https://img.shields.io/github/license/your-org/ventrixa?style=flat-square" />
+  <img src="https://img.shields.io/github/package-json/v/your-org/ventrixa?style=flat-square" />
+  <img src="https://img.shields.io/github/stars/your-org/ventrixa?style=flat-square" />
+  <img src="https://img.shields.io/github/issues/your-org/ventrixa?style=flat-square" />
+</p>
+**Built with:** Next.js · React · TypeScript · Tailwind CSS · OpenAI · Ollama
 </div>
 
 ---
 
-## 📋 What is Ventrixa?
+## 📋 Description
 
 Ventrixa is an AI-powered website builder that makes creating web pages incredibly simple. Instead of spending hours dragging and dropping components or writing complex code, you just describe what you need. Provide a brief description, select a few industry keywords, and pick your styling options. Ventrixa will instantly turn those inputs into a beautiful, ready-to-use website layout.
 

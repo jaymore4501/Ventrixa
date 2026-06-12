@@ -1,4 +1,4 @@
-# System Overview & Architectural Design
+# 🏢 Ventrixa — System Overview & Architectural Design
 
 This document details the architectural specifications, component interfaces, database schemas, and data flow pipelines for **Ventrixa**.
 

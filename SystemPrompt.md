@@ -1,4 +1,4 @@
-# Master System Prompt & Product Blueprint
+# 🚀 Ventrixa — Master System Prompt & Product Blueprint
 
 This document represents the core system prompt, generation rules, visual guidelines, and layout constraints used by **Ventrixa** to generate structured, responsive website blueprints.
 

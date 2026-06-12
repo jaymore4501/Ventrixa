@@ -1,4 +1,4 @@
-# Project Deployment & Operations Manual
+# 🐳 Ventrixa — Project Deployment & Operations Manual
 
 This guide describes how to configure, run, compile, test, deploy, and maintain **Ventrixa** in local development and production environments.
 
