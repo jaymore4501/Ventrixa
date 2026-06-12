@@ -1,4 +1,4 @@
-# <img src="public/Logo.png" alt="Ventrixa Logo" width="45" height="45" align="center" style="vertical-align: middle; border-radius: 8px; margin-right: 8px;" /> Ventrixa — AI Website Generation Platform
+# <img src="public/logo.png" alt="Ventrixa Logo" width="45" height="45" align="center" style="vertical-align: middle; border-radius: 8px; margin-right: 8px;" /> Ventrixa — AI Website Generation Platform
 
 <div align="center">
 
