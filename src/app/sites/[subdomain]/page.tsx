@@ -154,7 +154,7 @@ export default async function DeployedSitePage({
           href="/"
           className="text-[10px] bg-card border border-border text-muted rounded-full px-3 py-1 flex items-center gap-1 hover:text-heading transition-colors"
         >
-          Built with <span className="font-bold text-primary">Ventrixa</span>
+          Built with <span className="font-extrabold text-heading ml-1">Ventri<span className="text-primary">x</span>a</span>
         </Link>
       </header>
 

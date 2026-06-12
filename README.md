@@ -1,242 +1,134 @@
 # 🚀 Ventrixa — AI Website Generation Platform
 
 <div align="center">
-  <img src="/public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 20%;" />
-  <p><strong>✨ Bespoke, professional websites generated, customized, and deployed instantly via AI. ✨</strong></p>
-
-  [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge&logo=appveyor)](package.json)
-  [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=for-the-badge&logo=github)](https://github.com/jaymore4501/Ventrixa/actions)
+  <img src="public/Logo.png" alt="Ventrixa Logo" width="120" height="120" style="border-radius: 24px;" />
+  
+  ## ✨ Ventrixa ✨
+  
+  **Bespoke, professional websites generated, customized, and deployed instantly via AI.**
+  
+  [![Version](https://img.shields.io/badge/version-1.0.0-FF2E6E.svg?style=for-the-badge)](package.json)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
   [![React Version](https://img.shields.io/badge/React-19-blue.svg?style=for-the-badge&logo=react)](package.json)
-  [![Next.js Version](https://img.shields.io/badge/Next.js-16.2.7-black.svg?style=for-the-badge&logo=next.js)](package.json)
+  [![Next.js Version](https://img.shields.io/badge/Next.js-16.2.7-000000.svg?style=for-the-badge&logo=nextdotjs)](package.json)
   [![Tailwind v4](https://img.shields.io/badge/Tailwind-v4.0.0-38bdf8.svg?style=for-the-badge&logo=tailwindcss)](package.json)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 </div>
 
 ---
 
-## 📋 Description
+## 📋 What is Ventrixa?
 
-**Ventrixa** is an AI-powered Website Generation Platform that simplifies website creation. Unlike traditional drag-and-drop builders that require manual layout setup, or generic AI code generators that produce hard-to-maintain code, Ventrixa uses a **data-driven blueprint model**. 
-
-By compiling user-provided brand voices, colors, and industry keywords into structured JSON configurations, Ventrixa creates professional, responsive, and SEO-optimized website pages instantly. It includes a visual live preview workspace editor, automated styling theme generators (both light and dark modes), and instant edge deployment simulations to subdomains.
+Ventrixa is an AI-powered website builder that makes creating web pages incredibly simple. Instead of spending hours dragging and dropping components or writing complex code, you just describe what you need. Provide a brief description, select a few industry keywords, and pick your styling options. Ventrixa will instantly turn those inputs into a beautiful, ready-to-use website layout.
 
 ---
 
-## ✨ Features
+## ✨ Core Features
 
-- 🪄 **AI Website Generation Wizard**: Builds multi-page layouts from natural language description prompts, industries, and target audiences.
-- 🎨 **Coordinating HSL Color Systems**: Automatically generates harmonious background, card, primary, secondary, and accent color relationships.
-- 🛠️ **Visual live preview editor**: Allows drag-and-drop component positioning, text updates, button configurations, and custom styling updates in real time.
-- 🚀 **Dynamic Section Rendering Engine**: React components dynamically load layout nodes based on structured JSON configurations, avoiding raw HTML injection.
-- 📁 **Instant Deployment & Exporting**: Bundles generated static structures, assets, styling variables, and Next.js routes into a downloadable zip file or routes preview.
-- 🌐 **Ollama & OpenAI Integrations**: Seamlessly fallbacks to local LLMs (Ollama) or remote models (OpenAI `gpt-4o-mini`) for fully customized generation.
-- 📈 **SEO & Metadata Auto-Optimization**: Tailors titles, descriptions, and page keywords to the selected domain name and target business profile.
+* 🪄 **Smart AI Wizard** — Create multi-page layouts just by typing a natural-language description.
+* 🎨 **Adaptive Color System** — Automatically hashes and compiles matching light and dark themes.
+* 🛠️ **Real-Time Editor** — Tweak styling, change text, and edit components directly in your browser.
+* 📦 **Instant Zip Export** — Download your complete website as a production-ready Next.js project.
+* 🤖 **Ollama & OpenAI Support** — Choose between a free local AI (Ollama) or OpenAI APIs.
+* 📈 **Built-in SEO** — Generates search-engine optimized titles, meta descriptions, and keywords automatically.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ The Tech Stack
 
-### 💻 Frontend
-- **Framework**: [Next.js 16.2.7](https://nextjs.org/) (App Router & Turbopack)
-- **UI & Components**: [React 19](https://react.dev/), [Framer Motion](https://www.framer.com/motion/), [Lucide React](https://lucide.dev/), [ReactBits UI System](https://reactbits.dev/)
-- **Styling**: [TailwindCSS v4](https://tailwindcss.com/) & CSS Variables
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
-- **Forms & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
-
-### ⚙️ Backend & Database
-- **API Runtime**: Next.js Server Actions & Edge API Routes
-- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (Mongoose ODM)
-- **Mock Database Fallback**: File-system JSON storage (`src/data/mockDb.json`) for seamless local runs.
-- **Authentication**: [NextAuth.js v4](https://next-auth.js.org/) (Credentials and JWT strategy)
-- **AI Engine**: [OpenAI API Node SDK](https://github.com/openai/openai-node)
+* **Frontend**: [Next.js 16 (App Router)](https://nextjs.org/), [React 19](https://react.dev/), [Tailwind CSS v4](https://tailwindcss.com/), Zustand (State), Framer Motion (Animations).
+* **Backend**: Next.js Server Actions & Route Handlers, NextAuth (Secure JWT Authentication).
+* **Database**: Dual-Mode Architecture using MongoDB (Mongoose) with a seamless fallback to a local JSON file (`src/data/mockDb.json`) for zero-config setups.
+* **AI Engines**: OpenAI API or local Ollama servers (supports models like Llama 3).
 
 ---
 
 ## 📁 Project Structure
 
-Here are the most critical directories and files in the project:
+Here are the key files and folders you should know about:
 
 ```text
 ventrixa/
-├── public/                 # Static assets (logos, images, SVGs)
+├── public/                 # Static assets (logos, icons, images)
 ├── src/
-│   ├── app/                # Next.js App Router (Pages & API Routes)
-│   │   ├── api/            # Backend API Handlers (Auth, Deploy, Generate)
-│   │   ├── dashboard/      # User Workspace & AI Generator Wizard
-│   │   ├── editor/         # Live Visual Website Editor
-│   │   └── sites/          # Deployed Subdomain Previews
-│   ├── components/         # Reusable React UI Components & Magic UI
-│   ├── data/               # Mock DB & Templates
-│   ├── lib/                # Core Logic (AI generation, DB connections, styling)
-│   └── models/             # MongoDB Mongoose Schemas
+│   ├── app/                # Pages, dashboard wizard, and API endpoints
+│   ├── components/         # Reusable UI modules & animation components
+│   ├── data/               # Local mock DB (runs when MONGODB_URI is empty)
+│   ├── lib/                # Database configurations & AI compiler engines
+│   └── models/             # Mongoose database schemas
 ├── .env.example            # Environment variables template
-├── next.config.ts          # Next.js configuration
-├── package.json            # Project dependencies & scripts
-└── tailwind.config.ts      # Tailwind styling definitions (if applicable)
+├── Dockerfile              # Docker container configuration
+└── README.md               # Project guide (you are here!)
 ```
 
-*(Note: Other configuration files like `tsconfig.json`, `eslint.config.mjs`, etc., are included in the repository but omitted here for brevity.)*
-
 ---
 
-## 🏛️ Architecture Summary
+## ⚙️ Configuration & Environment Variables
 
-```text
-                       ┌────────────────────────────────────────────────────────┐
-                       │                       Frontend                         │
-                       │             (Next.js App / Visual Editor)              │
-                       └──────────────────────────┬─────────────────────────────┘
-                                                  │ (NextAuth HTTP API)
-                                                  ▼
-                       ┌────────────────────────────────────────────────────────┐
-                       │                   API Route Handlers                   │
-                       │           (Authentication, Generator API)              │
-                       └──────────────────────────┬─────────────────────────────┘
-                                                  │
-                   ┌──────────────────────────────┴─────────────────────────────┐
-                   ▼                                                            ▼
-    ┌─────────────────────────────┐                             ┌─────────────────────────────┐
-    │       AI Engine Layer       │                             │      Data Access Layer      │
-    │  (OpenAI SDK / Ollama client│                             │  (db.ts Database Switcher)  │
-    └─────────────────────────────┘                             └──────────────┬──────────────┘
-                                                                               │
-                                                   ┌───────────────────────────┴───────────────────────────┐
-                                                   ▼                                                       ▼
-                                    ┌─────────────────────────────┐                         ┌─────────────────────────────┐
-                                    │    MongoDB Atlas (Prod)     │                         │   File Mock DB (Local Dev)  │
-                                    │      (models/schemas.ts)    │                         │    (src/data/mockDb.json)   │
-                                    └─────────────────────────────┘                         └─────────────────────────────┘
+Copy the `.env.example` file to `.env.local` in the project root:
+
+```bash
+cp .env.example .env.local
 ```
 
-The system operates on an **abstracted database provider framework**. When `MONGODB_URI` is present in the environment variables, the system connects directly to a live **MongoDB Atlas** cluster via Mongoose. If the environment variable is absent or empty, the application seamlessly falls back to a **local filesystem mock database JSON file** (`src/data/mockDb.json`). This ensures that the application starts, generates project mockups, edits pages, and exports source code packages immediately on any computer, container, or CI environment without setup.
+Configure the variables below as needed:
+
+| Variable | What it does | Example |
+|----------|--------------|---------|
+| `MONGODB_URI` | **Optional** – Connection string for MongoDB Atlas. If left blank, the app stores data in `src/data/mockDb.json`. | `mongodb+srv://...` |
+| `NEXTAUTH_SECRET` | Key used to secure session cookies. | `your-secret-key-here` |
+| `NEXTAUTH_URL` | The URL of your local environment. | `http://localhost:3000` |
+| `OPENAI_API_KEY` | **Optional** – OpenAI API Key. If left blank, the app will try to use a local Ollama instance. | `sk-proj-xxxx...` |
+| `OPENAI_API_BASE_URL` | Base URL of your local Ollama API server. | `http://127.0.0.1:11434/v1` |
+| `AI_MODEL` | The AI model you want to run. | `gpt-4o-mini` or `llama3` |
 
 ---
 
-## 📸 Screenshots
+## 🚀 Easy Quick Start
 
-*To be added following local browser rendering walkthroughs.*
+Anyone can get Ventrixa up and running locally in four easy steps:
 
----
+### 1. Clone the Repository
+```bash
+git clone https://github.com/jaymore4501/Ventrixa.git
+cd Ventrixa
+```
 
-## 🚀 Installation Guide
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) v20.x or higher
-- [npm](https://www.npmjs.com/) v10.x or higher
-- (Optional) [MongoDB Atlas account](https://www.mongodb.com/cloud/atlas)
-- (Optional) [Ollama API running locally](https://ollama.com/) or [OpenAI API key](https://platform.openai.com/)
+### 3. Setup the Environment File
+Create a new file named `.env.local` using the template. If you don't have a MongoDB cluster or an OpenAI key, you can leave those blank. The app will automatically fall back to local JSON storage and local Ollama inference!
 
-### Step-by-Step Setup
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/jaymore4501/Ventrixa.git
-   cd Ventrixa
-   ```
-
-2. **Install project dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**:
-   Create a `.env.local` file in the root directory and copy the contents from `.env.example`:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Modify the variables as detailed in the [Environment Variables](#environment-variables) section.
-
-4. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-   Open your browser to [http://localhost:3000](http://localhost:3000) to view the Ventrixa panel.
+### 4. Run the Dev Server
+```bash
+npm run dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** in your browser to start building!
 
 ---
 
-## 🎯 Usage Guide
+## 🐳 Running with Docker
 
-### 1. 🔐 Account Onboarding & Login
-- Open [http://localhost:3000](http://localhost:3000) and click **Sign In** or **Build site for free**.
-- Create an account using credentials or click tab panels to sign in.
+You can easily run Ventrixa as a containerized app:
 
-### 2. 🪄 Website Generation Wizard
-- Click **New Project** to start the onboarding wizard.
-- **Step 1 (Information)**: Enter the website name, description, industry, business type, and target audience. 
-- **Step 2 (Keywords)**: Input keywords related to the niche (e.g. `fashion`, `clothes`, `luxury`). Press `Enter` to lock keywords.
-- **Step 3 (Branding)**: Select AI-suggested or manual color palettes, custom typography, brand voice tone, and regenerate or accept logo layouts.
-- **Step 4 (Structure)**: Choose required page routes (e.g. `Home`, `About`, `Services`, `Pricing`).
-- **Step 5 (Compile)**: Confirm and watch the compile pipeline load styling coordinates, retrieve images, write SEO metatags, and output the website blueprint.
+```bash
+# 1. Build the Docker image
+docker build -t ventrixa:latest .
 
-### 3. 🖥️ Live Preview & Visual Editing
-- Inside the workspace dashboard, choose your website project to launch the visual editor.
-- Click any header text, feature title, pricing item, or layout block to modify properties.
-- Drag-and-drop sections or click buttons in the side inspector panel to re-order, duplicate, or delete sections.
-
-### 4. 📤 Deploying & Exporting Source Code
-- Click **Publish** to make the site live instantly at a simulated subdomain (`subdomain.ventrixa.site`).
-- Click **Export Source Code** to download a production-ready Next.js zip file pre-packaged with all routes, page configurations, dynamic component renderers, CSS styling variables, and assets.
-
----
-
-## ⚙️ Configuration
-
-The project configures visual properties, typography limits, and component variants through the configuration files:
-- `next.config.ts`: Enables Turbopack development optimizations and handles image domains mappings.
-- `postcss.config.mjs`: Integrates Tailwind v4's CSS parser.
-- `src/lib/styles.ts`: Defines curated light/dark color themes and HSL palette-generation algorithms.
-- `src/lib/templates.ts`: Stores prebuilt JSON structure schemas for standard template layouts.
-
----
-
-## 🌐 Environment Variables
-
-| Variable | Description | Default / Example | Required |
-|----------|-------------|-------------------|----------|
-| `MONGODB_URI` | MongoDB Atlas cluster connection string. If missing, runs in File Mock DB mode. | `mongodb+srv://...` | No (dev/mock) / Yes (prod) |
-| `NEXTAUTH_SECRET` | Secret key used to encrypt user session cookies. | `ventrixa-secret-key-dev-only` | Yes (prod) |
-| `NEXTAUTH_URL` | Canonical URL of the application. | `http://localhost:3000` | Yes (prod) |
-| `OPENAI_API_KEY` | OpenAI API credentials for remote site generation. | `sk-proj-xxxx...` | No (falls back to local LLM or procedural) |
-| `OPENAI_API_BASE_URL` | Endpoint base URL for Ollama local API or custom gateways. | `http://127.0.0.1:11434/v1` | No |
-| `AI_MODEL` | Default model used for text generation. | `gpt-4o-mini` (or `llama3` for Ollama) | No |
-
----
-
-## 🔌 API Overview
-
-### 🔐 Authentication API
-- `POST /api/auth/signup`: Registers credentials users.
-- `POST /api/auth/signin` (NextAuth): Issues session tokens.
-
-### 🎨 Blueprint Generation API
-- `POST /api/generate`: Receives project descriptors, checks for LLM models (OpenAI or Ollama), and generates the page structures JSON.
-
-### 📁 Project Management API
-- `GET /api/projects`: Lists current user projects.
-- `POST /api/projects`: Saves a new project blueprint.
-- `GET /api/projects/[projectId]`: Retrieves details of a specific project.
-- `PUT /api/projects/[projectId]`: Updates project metadata or color configuration.
-- `DELETE /api/projects/[projectId]`: Deletes project files.
-- `GET /api/projects/[projectId]/export`: Bundles the pages, components, and css into a zipped file response.
-
-### 📃 Page and Section APIs
-- `GET /api/projects/[projectId]/pages`: Lists site pages.
-- `POST /api/pages/[pageId]/sections`: Saves updated visual layout sections.
-
----
-
-## 🤝 Contributing Guidelines
-
-1. **Create an Issue**: Document the bug report or requested feature enhancements.
-2. **Branch Naming**: Use clean, descriptive branch naming conventions:
-   ```bash
-   git checkout -b feature/color-palette-hashing
-   ```
-3. **Lint & Format**: Ensure code compiles without warnings and meets standard strict TypeScript types.
-4. **Pull Request (PR)**: Target the `main` branch. Provide detailed summaries of components modified, visual screenshots, and compilation test validations.
+# 2. Run the container using your local env settings
+docker run -d -p 3000:3000 --env-file .env.local --name ventrixa_container ventrixa:latest
+```
+Open **[http://localhost:3000](http://localhost:3000)** to view your containerized app.
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+---
+
+Enjoy building beautiful AI-generated websites with Ventrixa! 🚀

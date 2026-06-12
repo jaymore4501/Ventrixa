@@ -226,7 +226,7 @@ export default function ProfilePage() {
           </Link>
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="" className="w-6 h-6 object-cover" style={{ borderRadius: "18%" /*, filter: "drop-shadow(0 0 5px rgba(255,46,110,0.4))"*/ }} />
-            <span className="text-white font-extrabold text-base">Ventr<span className="text-[#FF2E6E]">ixa</span></span>
+            <span className="text-white font-extrabold text-base">Ventri<span className="text-[#FF2E6E]">x</span>a</span>
           </div>
         </div>
         <div className="flex items-center gap-3">

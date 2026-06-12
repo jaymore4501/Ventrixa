@@ -96,7 +96,7 @@ export default function Dashboard() {
             /* shadow-[0_0_15px_rgba(255,46,110,0.3)] */
           />
           <span className="font-extrabold text-heading text-lg">
-            Ventr<span className="text-primary">ixa</span> Dashboard
+            Ventri<span className="text-primary">x</span>a Dashboard
           </span>
         </div>
 

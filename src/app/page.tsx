@@ -283,7 +283,7 @@ export default function LandingPage() {
               //   "drop-shadow(0 0 8px rgba(255,46,110,0.55)) drop-shadow(0 0 2px rgba(255,46,110,0.3))",
             }}
           />
-          <span className="text-white font-extrabold text-base">Ventr<span className="text-[#FF2E6E]">ixa</span></span>
+          <span className="text-white font-extrabold text-base">Ventri<span className="text-[#FF2E6E]">x</span>a</span>
         </div>
 
         {/* Nav Links */}
@@ -739,7 +739,7 @@ export default function LandingPage() {
       <footer className="border-t border-white/[0.06] bg-[#090a0d]/90 backdrop-blur-sm px-8 py-14 text-xs text-gray-500 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2.5">
-            <span className="text-white font-extrabold text-base">Ventr<span className="text-[#FF2E6E]">ixa</span></span>
+            <span className="text-white font-extrabold text-base">Ventri<span className="text-[#FF2E6E]">x</span>a</span>
             <span>— AI Website Generation Platform</span>
           </div>
           <p>&copy; {new Date().getFullYear()} Ventrixa Inc. All rights reserved.</p>
@@ -778,7 +778,7 @@ export default function LandingPage() {
             <div className="px-8 pt-8 pb-6 text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <img src="/logo.png" alt="" className="w-7 h-7 object-cover" style={{ borderRadius: "18%" /*, filter: "drop-shadow(0 0 6px rgba(255,46,110,0.5))"*/ }} />
-                <span className="text-white font-extrabold text-base">Ventr<span className="text-[#FF2E6E]">ixa</span></span>
+                <span className="text-white font-extrabold text-base">Ventri<span className="text-[#FF2E6E]">x</span>a</span>
               </div>
               <h2 className="text-white text-xl font-bold">{activeTab === "signin" ? "Welcome back" : "Create your account"}</h2>
               <p className="text-gray-400 text-xs mt-1">{activeTab === "signin" ? "Sign in to your workspace" : "Join Ventrixa — it's free"}</p>

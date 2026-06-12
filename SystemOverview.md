@@ -9,34 +9,30 @@ This document details the architectural specifications, component interfaces, da
 Ventrixa is structured as a modular, decoupled Next.js web application. It combines Client-Side Client Components for interactive visual layout editing with Server-Side Server Routes for secure database query transactions, file generation, and AI generation tasks.
 
 ```
-                      ┌──────────────────────────────────────────────┐
-                      │                 Client Tier                  │
-                      │   (React 19, Tailwind v4, Zustand State,     │
-                      │    Shadcn UI & ReactBits Animation Mesh)     │
-                      └──────────────────────┬───────────────────────┘
-                                             │ HTTP Requests (JSON)
-                                             ▼
-                      ┌──────────────────────────────────────────────┐
-                      │              Web/API Route Tier              │
-                      │      (Next.js App Router API endpoints,      │
-                      │        NextAuth session validation)          │
-                      └──────────────────────┬───────────────────────┘
-                                             │
-                       ┌─────────────────────┴─────────────────────┐
-                       ▼                                           ▼
-        ┌──────────────────────────────┐            ┌──────────────────────────────┐
-        │       AI Layer Services      │            │     Database Access Layer    │
-        │     (OpenAI SDK wrapper,     │            │    (Singleton connection,    │
-        │    dynamic prompt builder)   │            │   procedural data switcher)  │
-        └──────────────────────────────┘            └──────────────┬───────────────┘
-                                                                   │
-                                             ┌─────────────────────┴─────────────────────┐
-                                             ▼                                           ▼
-                              ┌──────────────────────────────┐            ┌──────────────────────────────┐
-                              │     MongoDB Atlas Cluster    │            │     Local File Mock DB       │
-                              │     (Production collections)  │            │    (src/data/mockDb.json)    │
-                              │                              │            │                              │
-                              └──────────────────────────────┘            └──────────────────────────────┘
+      ┌──────────────────────────────────────────┐
+      │               Client Tier                │
+      │   (React 19, Tailwind v4, Zustand UI)    │
+      └────────────────────┬─────────────────────┘
+                           │ HTTP JSON API
+                           ▼
+      ┌──────────────────────────────────────────┐
+      │            Web & API Router              │
+      │     (App Router, NextAuth Security)      │
+      └────────────────────┬─────────────────────┘
+                           │
+                 ┌─────────┴─────────┐
+                 ▼                   ▼
+      ┌────────────────────┐ ┌───────────────────┐
+      │   AI Core Service  │ │  Data Controller  │
+      │ (OpenAI & Ollama)  │ │ (Database Switch) │
+      └────────────────────┘ └─────────┬─────────┘
+                                       │
+                             ┌─────────┴─────────┐
+                             ▼                   ▼
+                       ┌───────────┐       ┌───────────┐
+                       │  MongoDB  │       │  Mock DB  │
+                       │  (Cloud)  │       │  (JSON)   │
+                       └───────────┘       └───────────┘
 ```
 
 ---
