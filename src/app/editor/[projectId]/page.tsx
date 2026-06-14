@@ -652,6 +652,29 @@ export default function VisualEditor({
   const handleDeploy = async () => {
     if (!website) return;
     await handleSave();
+
+    // Quick redeploy if already published
+    if (website.isPublished || website.version >= 1) {
+      setAlertMsg({ type: "success", text: "Updating existing deployment..." });
+      try {
+        const res = await fetch("/api/deploy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subdomain: website.subdomain }),
+        });
+        if (res.ok) {
+           const data = await res.json();
+           setWebsite((prev: any) => ({ ...prev, isPublished: true, version: data.version }));
+           setDeploySuccess(true);
+        } else {
+           setAlertMsg({ type: "error", text: "Error updating deployment." });
+        }
+      } catch (e) {
+         setAlertMsg({ type: "error", text: "Network error during deployment." });
+      }
+      return;
+    }
+
     setDeploying(true);
     setDeploySuccess(false);
     setDeployLogs([]);
@@ -2342,78 +2365,91 @@ export default function VisualEditor({
 
       {/* Deployment progress modal */}
       {deploying && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4">
-          <div className="relative w-full max-w-lg bg-[#212632] border border-border rounded-2xl shadow-2xl p-8">
-            <div className="flex items-center gap-3 mb-5 pb-4 border-b border-border">
-              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 animate-in fade-in duration-300">
+          <div className="relative w-full max-w-2xl bg-[#0f1117] border border-white/10 rounded-3xl shadow-2xl p-8 overflow-hidden">
+            {/* Glowing neon bg accents */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[200px] bg-gradient-to-b from-primary/20 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute -top-32 -right-32 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="relative z-10 flex items-center gap-4 mb-8 pb-6 border-b border-white/5">
+              <div className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/30">
+                <Loader2 className="w-6 h-6 animate-spin text-primary" />
+              </div>
               <div>
-                <h3 className="text-heading text-xl font-bold">Deploying Project to Edge CDN</h3>
-                <p className="text-muted text-xs">Uploading your local changes and mapping edge servers...</p>
+                <h3 className="text-white text-2xl font-black tracking-tight">Deploying to Global Edge CDN</h3>
+                <p className="text-gray-400 text-sm mt-1">Propagating code bundle to 48 regions worldwide...</p>
               </div>
             </div>
 
             {/* Edge network animation */}
-            <div className="relative h-[180px] bg-background/50 border border-border rounded-xl flex items-center justify-center overflow-hidden mb-5">
+            <div className="relative h-[220px] bg-black/40 border border-white/5 rounded-2xl flex items-center justify-center overflow-hidden mb-8 shadow-inner">
+              {/* Grid background */}
+              <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+              
               {/* Stylized SVG Dotted World Map */}
-              <svg viewBox="0 0 1000 500" className="absolute inset-0 w-full h-full opacity-10 text-muted-foreground fill-current">
-                <path d="M150,150 L200,100 L300,150 L400,100 L500,200 L600,150 L700,200 L800,150 L900,180" stroke="currentColor" strokeWidth="2" strokeDasharray="5,5" fill="none" />
-                <path d="M100,300 L250,350 L400,280 L600,320 L750,300 L900,350" stroke="currentColor" strokeWidth="2" strokeDasharray="5,5" fill="none" />
+              <svg viewBox="0 0 1000 500" className="absolute inset-0 w-full h-full opacity-20 text-white fill-current">
+                <path d="M150,150 L200,100 L300,150 L400,100 L500,200 L600,150 L700,200 L800,150 L900,180" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" fill="none" />
+                <path d="M100,300 L250,350 L400,280 L600,320 L750,300 L900,350" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" fill="none" />
               </svg>
 
               {/* Edge Server Nodes */}
               <div className="absolute top-[35%] left-[20%] flex flex-col items-center">
-                <span className={`w-2.5 h-2.5 rounded-full relative ${deployLogs.length >= 2 ? "bg-primary animate-pulse shadow-[0_0_8px_#ff2e6e]" : "bg-muted-foreground/30"}`}>
+                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 2 ? "bg-primary animate-pulse shadow-[0_0_15px_#ff2e6e]" : "bg-white/20"}`}>
                   {deployLogs.length >= 2 && <span className="absolute inset-0 rounded-full bg-primary animate-ping" />}
                 </span>
-                <span className="text-[7px] font-mono text-muted mt-1 select-none">SF-Edge</span>
+                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">SF-Edge</span>
               </div>
               <div className="absolute top-[25%] left-[48%] flex flex-col items-center">
-                <span className={`w-2.5 h-2.5 rounded-full relative ${deployLogs.length >= 3 ? "bg-purple-500 animate-pulse shadow-[0_0_8px_#8b5cf6]" : "bg-muted-foreground/30"}`}>
+                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 3 ? "bg-purple-500 animate-pulse shadow-[0_0_15px_#8b5cf6]" : "bg-white/20"}`}>
                   {deployLogs.length >= 3 && <span className="absolute inset-0 rounded-full bg-purple-500 animate-ping" />}
                 </span>
-                <span className="text-[7px] font-mono text-muted mt-1 select-none">London-Edge</span>
+                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">London-Edge</span>
               </div>
               <div className="absolute top-[28%] left-[54%] flex flex-col items-center">
-                <span className={`w-2.5 h-2.5 rounded-full relative ${deployLogs.length >= 4 ? "bg-purple-500 animate-pulse shadow-[0_0_8px_#8b5cf6]" : "bg-muted-foreground/30"}`}>
-                  {deployLogs.length >= 4 && <span className="absolute inset-0 rounded-full bg-purple-500 animate-ping" />}
+                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 4 ? "bg-blue-500 animate-pulse shadow-[0_0_15px_#3b82f6]" : "bg-white/20"}`}>
+                  {deployLogs.length >= 4 && <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping" />}
                 </span>
-                <span className="text-[7px] font-mono text-muted mt-1 select-none">Frankfurt-Edge</span>
+                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">Frankfurt-Edge</span>
               </div>
               <div className="absolute top-[32%] left-[82%] flex flex-col items-center">
-                <span className={`w-2.5 h-2.5 rounded-full relative ${deployLogs.length >= 5 ? "bg-accent animate-pulse shadow-[0_0_8px_#ff4e87]" : "bg-muted-foreground/30"}`}>
-                  {deployLogs.length >= 5 && <span className="absolute inset-0 rounded-full bg-accent animate-ping" />}
+                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 5 ? "bg-emerald-500 animate-pulse shadow-[0_0_15px_#10b981]" : "bg-white/20"}`}>
+                  {deployLogs.length >= 5 && <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping" />}
                 </span>
-                <span className="text-[7px] font-mono text-muted mt-1 select-none">Tokyo-Edge</span>
+                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">Tokyo-Edge</span>
               </div>
 
               {/* Uploading project beams */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-primary/20 border border-primary/40 text-primary text-[8px] font-mono font-bold px-2 py-0.5 rounded shadow z-10 flex items-center gap-1 animate-pulse">
-                <Loader2 className="w-2.5 h-2.5 animate-spin" /> Uploading to global edge...
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/5 backdrop-blur-md border border-white/10 text-white text-[10px] font-mono font-bold px-4 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-2 animate-pulse">
+                <Globe className="w-3.5 h-3.5 text-primary" /> Uploading to global edge nodes...
               </div>
 
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-12 h-12 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center text-primary animate-pulse shadow-[0_0_20px_rgba(255,46,110,0.2)]">
-                  <Globe className="w-6 h-6 animate-spin" style={{ animationDuration: "6s" }} />
+                <div className="w-16 h-16 bg-primary/5 border border-primary/20 rounded-full flex items-center justify-center text-primary animate-pulse shadow-[0_0_30px_rgba(255,46,110,0.15)] backdrop-blur-sm">
+                  <Rocket className="w-6 h-6 animate-bounce" />
                 </div>
               </div>
             </div>
 
             {/* Logs console */}
-            <div className="bg-background/80 border border-border rounded-xl p-5 h-[140px] overflow-y-auto font-mono text-xs text-primary space-y-2 leading-relaxed">
+            <div className="relative bg-[#090a0f] border border-white/5 rounded-xl p-6 h-[180px] overflow-y-auto font-mono text-sm space-y-3 leading-relaxed shadow-inner">
               {deployLogs.map((log, idx) => (
-                <p key={idx} className="transition-all duration-300">
-                  {log.includes("successfully") || log.includes("complete") ? (
-                    <span className="text-green-400 font-bold flex items-center gap-1">
-                      <CheckCircle className="w-3.5 h-3.5" /> {log}
-                    </span>
-                  ) : (
-                    log
-                  )}
-                </p>
+                <div key={idx} className="flex items-start gap-2 animate-in slide-in-from-bottom-2 fade-in duration-300">
+                  <span className="text-gray-600 mt-0.5">&gt;</span>
+                  <p className="transition-all duration-300">
+                    {log.includes("successfully") || log.includes("complete") ? (
+                      <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                        <CheckCircle className="w-4 h-4" /> {log}
+                      </span>
+                    ) : (
+                      <span className="text-gray-300">{log}</span>
+                    )}
+                  </p>
+                </div>
               ))}
-              <div className="animate-pulse flex items-center gap-1 text-[#FF2E6E] font-bold">
-                <span>&gt;</span>
-                <span className="w-2.5 h-4 bg-[#FF2E6E] inline-block" />
+              <div className="flex items-center gap-2 text-primary font-bold">
+                <span className="text-primary/50">&gt;</span>
+                <span className="w-2 h-4 bg-primary inline-block animate-pulse" />
               </div>
             </div>
           </div>
