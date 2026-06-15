@@ -31,6 +31,11 @@ import {
   LayoutGrid,
   Maximize2,
   Minimize2,
+  FolderUp,
+  Server,
+  Cloud,
+  FileCode,
+  Layers,
 } from "lucide-react";
 import SectionRenderer from "@/components/SectionRenderer";
 import { getBrandStyles, CURATED_PALETTES } from "@/lib/styles";
@@ -654,7 +659,7 @@ export default function VisualEditor({
     await handleSave();
 
     // Quick redeploy if already published
-    if (website.isPublished || website.version >= 1) {
+    if (website.isPublished) {
       setAlertMsg({ type: "success", text: "Updating existing deployment..." });
       try {
         const res = await fetch("/api/deploy", {
@@ -2382,51 +2387,70 @@ export default function VisualEditor({
               </div>
             </div>
 
-            {/* Edge network animation */}
+            {/* Cloud Sync Animation */}
             <div className="relative h-[220px] bg-black/40 border border-white/5 rounded-2xl flex items-center justify-center overflow-hidden mb-8 shadow-inner">
+              <style>{`
+                @keyframes slide-right {
+                  0% { transform: translateX(-100px); opacity: 0; }
+                  20% { opacity: 1; }
+                  80% { opacity: 1; }
+                  100% { transform: translateX(300px); opacity: 0; }
+                }
+                @keyframes dash-flow {
+                  to { stroke-dashoffset: -20; }
+                }
+              `}</style>
+
               {/* Grid background */}
               <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
-              
-              {/* Stylized SVG Dotted World Map */}
-              <svg viewBox="0 0 1000 500" className="absolute inset-0 w-full h-full opacity-20 text-white fill-current">
-                <path d="M150,150 L200,100 L300,150 L400,100 L500,200 L600,150 L700,200 L800,150 L900,180" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" fill="none" />
-                <path d="M100,300 L250,350 L400,280 L600,320 L750,300 L900,350" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" fill="none" />
-              </svg>
 
-              {/* Edge Server Nodes */}
-              <div className="absolute top-[35%] left-[20%] flex flex-col items-center">
-                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 2 ? "bg-primary animate-pulse shadow-[0_0_15px_#ff2e6e]" : "bg-white/20"}`}>
-                  {deployLogs.length >= 2 && <span className="absolute inset-0 rounded-full bg-primary animate-ping" />}
-                </span>
-                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">SF-Edge</span>
-              </div>
-              <div className="absolute top-[25%] left-[48%] flex flex-col items-center">
-                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 3 ? "bg-purple-500 animate-pulse shadow-[0_0_15px_#8b5cf6]" : "bg-white/20"}`}>
-                  {deployLogs.length >= 3 && <span className="absolute inset-0 rounded-full bg-purple-500 animate-ping" />}
-                </span>
-                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">London-Edge</span>
-              </div>
-              <div className="absolute top-[28%] left-[54%] flex flex-col items-center">
-                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 4 ? "bg-blue-500 animate-pulse shadow-[0_0_15px_#3b82f6]" : "bg-white/20"}`}>
-                  {deployLogs.length >= 4 && <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping" />}
-                </span>
-                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">Frankfurt-Edge</span>
-              </div>
-              <div className="absolute top-[32%] left-[82%] flex flex-col items-center">
-                <span className={`w-3 h-3 rounded-full relative ${deployLogs.length >= 5 ? "bg-emerald-500 animate-pulse shadow-[0_0_15px_#10b981]" : "bg-white/20"}`}>
-                  {deployLogs.length >= 5 && <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping" />}
-                </span>
-                <span className="text-[9px] font-mono text-gray-400 mt-2 select-none uppercase tracking-widest font-semibold">Tokyo-Edge</span>
-              </div>
+              <div className="absolute inset-0 flex items-center justify-between px-10 md:px-16">
+                {/* Local Project Folder */}
+                <div className="relative flex flex-col items-center z-20">
+                  <div className="w-20 h-20 bg-blue-500/10 border border-blue-500/30 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.15)] z-10 backdrop-blur-md relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-transparent" />
+                    <FolderUp className="w-10 h-10 text-blue-400 relative z-10 animate-pulse" />
+                  </div>
+                  <span className="text-[10px] font-mono text-blue-400 mt-4 font-bold tracking-widest uppercase">Local Build</span>
+                </div>
 
-              {/* Uploading project beams */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/5 backdrop-blur-md border border-white/10 text-white text-[10px] font-mono font-bold px-4 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-2 animate-pulse">
-                <Globe className="w-3.5 h-3.5 text-primary" /> Uploading to global edge nodes...
-              </div>
+                {/* Animated Transfer Path */}
+                <div className="flex-1 relative h-20 mx-4 md:mx-6 flex items-center justify-center z-10">
+                  {/* SVG Flowing Path */}
+                  <svg className="absolute w-full h-[4px]" preserveAspectRatio="none">
+                    <path d="M 0 2 L 1000 2" stroke="rgba(255, 46, 110, 0.4)" strokeWidth="2" strokeDasharray="10 10" style={{ animation: 'dash-flow 1s linear infinite' }} />
+                  </svg>
+                  
+                  {/* Floating Files */}
+                  <div className="absolute inset-0 flex items-center justify-center overflow-hidden w-full">
+                    <div className="absolute" style={{ animation: 'slide-right 2.5s linear infinite' }}>
+                      <div className="w-10 h-10 bg-[#0f1117] border border-primary/50 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(255,46,110,0.4)]">
+                        <FileCode className="w-5 h-5 text-primary" />
+                      </div>
+                    </div>
+                    <div className="absolute" style={{ animation: 'slide-right 2.5s linear infinite 1.25s' }}>
+                      <div className="w-10 h-10 bg-[#0f1117] border border-primary/50 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(255,46,110,0.4)]">
+                        <Layers className="w-5 h-5 text-primary" />
+                      </div>
+                    </div>
+                  </div>
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 bg-primary/5 border border-primary/20 rounded-full flex items-center justify-center text-primary animate-pulse shadow-[0_0_30px_rgba(255,46,110,0.15)] backdrop-blur-sm">
-                  <Rocket className="w-6 h-6 animate-bounce" />
+                  {/* Progress Badge */}
+                  <div className="absolute -top-12 bg-[#0f1117] border border-white/10 text-white text-[10px] font-mono font-bold px-4 py-1.5 rounded-full shadow-lg z-10 flex items-center gap-2 animate-pulse whitespace-nowrap">
+                    <Cloud className="w-3.5 h-3.5 text-primary" /> Syncing files to server...
+                  </div>
+                </div>
+
+                {/* Cloud Server */}
+                <div className="relative flex flex-col items-center z-20">
+                  <div className="w-20 h-20 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.15)] z-10 backdrop-blur-md relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent" />
+                    <Server className="w-10 h-10 text-emerald-400 relative z-10" />
+                  </div>
+                  <div className="absolute -top-4 -right-4 w-10 h-10 bg-[#0f1117] border border-emerald-500/30 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.2)] z-20">
+                    <Cloud className="w-5 h-5 text-emerald-400 animate-bounce" />
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 mt-4 font-bold tracking-widest uppercase">Cloud Server</span>
                 </div>
               </div>
             </div>
