@@ -17,6 +17,8 @@ import {
   Layers,
   CheckCircle,
   FileCode,
+  X,
+  AlertTriangle,
 } from "lucide-react";
 import BorderGlow from "@/components/reactbits/BorderGlow";
 
@@ -26,6 +28,7 @@ export default function Dashboard() {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -55,7 +58,7 @@ export default function Dashboard() {
 
   const handleCreateProject = () => {
     if (projects.length >= 1) {
-      alert("Free Plan users can only create 1 website for now. Premium plans are coming soon!");
+      setShowUpgradeModal(true);
       return;
     }
     router.push("/dashboard/wizard");
@@ -250,6 +253,50 @@ export default function Dashboard() {
           </div>
         )}
       </main>
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowUpgradeModal(false); }}
+        >
+          <div
+            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.2)",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(255,46,110,0.06)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
+            
+            <button
+              onClick={() => setShowUpgradeModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-16 h-16 mx-auto bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-400 border border-yellow-500/20">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+            
+            <h2 className="text-white text-2xl font-bold mb-3">Project Limit Reached</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+              Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!
+            </p>
+
+            <button
+              onClick={() => setShowUpgradeModal(false)}
+              className="w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
