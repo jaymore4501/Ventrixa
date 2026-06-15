@@ -476,26 +476,6 @@ export default function ProfilePage() {
         {/* ── Account Tab ─────────────────────────────────────────── */}
         {activeTab === "account" && (
           <div className="space-y-6">
-            {/* Account Info */}
-            <div className="max-w-2xl mx-auto rounded-2xl p-8" style={{ background: "rgba(18,20,28,0.8)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h2 className="text-white text-xl font-bold mb-6 text-center">Account Information</h2>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-black/20 rounded-xl">
-                  <Mail className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Email</p>
-                    <p className="text-white text-sm">{profile?.email}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-black/20 rounded-xl">
-                  <User className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Sign-in Method</p>
-                    <p className="text-white text-sm capitalize">{profile?.provider === "credentials" ? "Email & Password" : profile?.provider}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Change Password — credentials users only */}
             {profile?.provider === "credentials" && (
