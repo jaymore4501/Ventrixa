@@ -101,7 +101,7 @@ export default function ProfilePage() {
       const res = await fetch("/api/projects");
       if (res.ok) {
         const data = await res.json();
-        setProjects(data.projects || []);
+        setProjects(Array.isArray(data) ? data : []);
       }
     } catch (e) {
       console.error("Failed to fetch projects");

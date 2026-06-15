@@ -88,7 +88,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#151821] text-[#D6DAE2] flex flex-col">
       {/* Top Navbar */}
       <header className="border-b border-border bg-background px-8 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <img
             src="/logo.png"
             alt="Ventrixa Logo"
@@ -98,7 +98,7 @@ export default function Dashboard() {
           <span className="font-extrabold text-heading text-lg">
             Ventri<span className="text-primary">x</span>a Dashboard
           </span>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
