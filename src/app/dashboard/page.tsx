@@ -29,6 +29,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -64,16 +65,22 @@ export default function Dashboard() {
     router.push("/dashboard/wizard");
   };
 
-  const handleDeleteProject = async (id: string, e: React.MouseEvent) => {
+  const handleDeleteProject = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (!confirm("Are you sure you want to delete this project?")) return;
+    setProjectToDelete(id);
+  };
 
-    setDeletingId(id);
+  const confirmDeleteProject = async () => {
+    if (!projectToDelete) return;
+    setDeletingId(projectToDelete);
+    const idToDelete = projectToDelete;
+    setProjectToDelete(null);
+
     try {
-      const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/projects/${idToDelete}`, { method: "DELETE" });
       if (res.ok) {
-        setProjects((prev) => prev.filter((p) => (p.id || p._id) !== id));
+        setProjects((prev) => prev.filter((p) => (p.id || p._id) !== idToDelete));
       }
     } catch (err) {
       console.error("Delete project failed:", err);
@@ -294,6 +301,57 @@ export default function Dashboard() {
             >
               Got it
             </button>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {projectToDelete && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setProjectToDelete(null); }}
+        >
+          <div
+            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.2)",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(255,46,110,0.06)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
+            
+            <button
+              onClick={() => setProjectToDelete(null)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-16 h-16 mx-auto bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 text-red-500 border border-red-500/20">
+              <Trash2 className="w-8 h-8" />
+            </div>
+            
+            <h2 className="text-white text-2xl font-bold mb-3">Delete Project?</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+              Are you sure you want to delete this project? This action cannot be undone and will permanently remove all related files.
+            </p>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => setProjectToDelete(null)}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-white text-sm font-bold py-3.5 rounded-xl transition-all border border-white/10"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteProject}
+                className="flex-1 bg-gradient-to-r from-red-600 to-red-800 hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.25)]"
+              >
+                Delete Project
+              </button>
+            </div>
           </div>
         </div>
       )}

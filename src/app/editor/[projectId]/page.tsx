@@ -36,6 +36,7 @@ import {
   Cloud,
   FileCode,
   Layers,
+  AlertTriangle,
 } from "lucide-react";
 import SectionRenderer from "@/components/SectionRenderer";
 import { getBrandStyles, CURATED_PALETTES } from "@/lib/styles";
@@ -161,6 +162,13 @@ export default function VisualEditor({
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
   const [alertMsg, setAlertMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isUnsaved, setIsUnsaved] = useState(false);
+  const [dialogState, setDialogState] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    type: "alert" | "confirm";
+    onConfirm?: () => void;
+  }>({ isOpen: false, title: "", message: "", type: "alert" });
 
   // Undo/Redo stack history
   const [history, setHistory] = useState<any[][]>([]);
@@ -284,10 +292,16 @@ export default function VisualEditor({
   };
 
   const applyTemplateLayout = (templateId: string) => {
-    const confirmReplace = window.confirm(
-      "Are you sure you want to replace the current page layout with this template? Your unsaved custom modifications on this page will be overwritten."
-    );
-    if (!confirmReplace) return;
+    setDialogState({
+      isOpen: true,
+      title: "Replace Layout?",
+      message: "Are you sure you want to replace the current page layout with this template? Your unsaved custom modifications on this page will be overwritten.",
+      type: "confirm",
+      onConfirm: () => executeApplyTemplateLayout(templateId)
+    });
+  };
+
+  const executeApplyTemplateLayout = (templateId: string) => {
 
     const template = READY_TEMPLATES.find((t) => t.id === templateId);
     if (!template) return;
@@ -413,7 +427,15 @@ export default function VisualEditor({
   };
 
   const deleteSection = (idx: number) => {
-    if (sections.length <= 1) return alert("Your website needs at least one section!");
+    if (sections.length <= 1) {
+      setDialogState({
+        isOpen: true,
+        title: "Action Restricted",
+        message: "Your website needs at least one section!",
+        type: "alert"
+      });
+      return;
+    }
     const filtered = sections.filter((_, i) => i !== idx);
     updateSectionsState(filtered);
     setSelectedSectionIdx(null);
@@ -749,11 +771,11 @@ export default function VisualEditor({
           window.URL.revokeObjectURL(url);
         }, 1000);
       } else {
-        alert("Failed to export project code. Please try again.");
+        setDialogState({ isOpen: true, title: "Export Failed", message: "Failed to export project code. Please try again.", type: "alert" });
       }
     } catch (e) {
       console.error("Download ZIP error:", e);
-      alert("Error occurred during ZIP generation.");
+      setDialogState({ isOpen: true, title: "Export Error", message: "Error occurred during ZIP generation.", type: "alert" });
     } finally {
       setExporting(false);
     }
@@ -784,6 +806,70 @@ export default function VisualEditor({
             <button type="button" onClick={() => setAlertMsg(null)} className="ml-1 hover:opacity-80 p-0.5 rounded">
               <X className="w-3.5 h-3.5" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Global Dialog Modal */}
+      {dialogState.isOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setDialogState(prev => ({ ...prev, isOpen: false })); }}
+        >
+          <div
+            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.2)",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(255,46,110,0.06)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
+            
+            <button
+              onClick={() => setDialogState(prev => ({ ...prev, isOpen: false }))}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-16 h-16 mx-auto bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400 border border-blue-500/20">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+            
+            <h2 className="text-white text-2xl font-bold mb-3">{dialogState.title}</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">{dialogState.message}</p>
+
+            <div className="flex gap-4">
+              {dialogState.type === "confirm" ? (
+                <>
+                  <button
+                    onClick={() => setDialogState(prev => ({ ...prev, isOpen: false }))}
+                    className="flex-1 bg-white/5 hover:bg-white/10 text-white text-sm font-bold py-3.5 rounded-xl transition-all border border-white/10"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      setDialogState(prev => ({ ...prev, isOpen: false }));
+                      if (dialogState.onConfirm) dialogState.onConfirm();
+                    }}
+                    className="flex-1 bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
+                  >
+                    Confirm
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => setDialogState(prev => ({ ...prev, isOpen: false }))}
+                  className="w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
+                >
+                  Got it
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}
