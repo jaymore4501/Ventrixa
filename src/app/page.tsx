@@ -91,6 +91,7 @@ function NavAvatar({ session }: { session: any }) {
 export default function LandingPage() {
   const { data: session, status } = useSession();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showPricingPopup, setShowPricingPopup] = useState(false);
   const [activeTab, setActiveTab] = useState<"signin" | "signup">("signin");
 
   // Sign In state
@@ -672,7 +673,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => openModal()}
+                  onClick={() => setShowPricingPopup(true)}
                   className="mt-8 w-full border border-white/[0.06] hover:border-white/20 text-white text-xs font-bold py-3 rounded-lg transition-all bg-white/[0.02]"
                 >
                   Start Building
@@ -714,7 +715,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => openModal()}
+                  onClick={() => setShowPricingPopup(true)}
                   className="mt-8 w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-xs font-bold py-3 rounded-lg transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
                 >
                   Upgrade to Pro
@@ -753,7 +754,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => openModal()}
+                  onClick={() => setShowPricingPopup(true)}
                   className="mt-8 w-full border border-white/[0.06] hover:border-white/20 text-white text-xs font-bold py-3 rounded-lg transition-all bg-white/[0.02]"
                 >
                   Contact Sales
@@ -978,6 +979,50 @@ export default function LandingPage() {
                 </p>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Coming Soon Pricing Popup */}
+      {showPricingPopup && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowPricingPopup(false); }}
+        >
+          <div
+            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.2)",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(255,46,110,0.06)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
+            
+            <button
+              onClick={() => setShowPricingPopup(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+              <img src="/logo.png" alt="Ventrixa Logo" className="w-14 h-14 object-cover" style={{ borderRadius: "22%" }} />
+            </div>
+            
+            <h2 className="text-white text-2xl font-bold mb-3">Coming Soon</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+              We are currently in the testing phase! These premium features and subscriptions will be rolling out soon. Stay tuned.
+            </p>
+
+            <button
+              onClick={() => setShowPricingPopup(false)}
+              className="w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
+            >
+              Got it
+            </button>
           </div>
         </div>
       )}
