@@ -46,6 +46,15 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+  const handleCreateProject = () => {
+    if (projects.length >= 1) {
+      setShowUpgradeModal(true);
+      return;
+    }
+    router.push("/dashboard/wizard");
+  };
 
   // Profile form state
   const [editName, setEditName] = useState("");
@@ -375,13 +384,13 @@ export default function ProfilePage() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-white text-lg font-bold">My Website Creations</h2>
-              <Link
-                href="/dashboard/wizard"
+              <button
+                onClick={handleCreateProject}
                 className="flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all hover:brightness-110"
                 style={{ background: "linear-gradient(135deg, #FF2E6E, #9d174d)", boxShadow: "0 0 14px rgba(255,46,110,0.2)" }}
               >
                 <Plus className="w-3.5 h-3.5" /> New Website
-              </Link>
+              </button>
             </div>
 
             {projects.length === 0 ? (
@@ -392,13 +401,13 @@ export default function ProfilePage() {
                 <Layers className="w-12 h-12 text-gray-600 mx-auto mb-4" />
                 <h3 className="text-white text-lg font-bold mb-2">No websites yet</h3>
                 <p className="text-gray-500 text-sm mb-6">Start building your first AI-generated website</p>
-                <Link
-                  href="/dashboard/wizard"
+                <button
+                  onClick={handleCreateProject}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-sm font-bold hover:brightness-110 transition-all"
                   style={{ background: "linear-gradient(135deg, #FF2E6E, #9d174d)" }}
                 >
                   <Plus className="w-4 h-4" /> Create First Site
-                </Link>
+                </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -563,6 +572,50 @@ export default function ProfilePage() {
           </div>
         )}
       </div>
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowUpgradeModal(false); }}
+        >
+          <div
+            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.2)",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(255,46,110,0.06)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
+            
+            <button
+              onClick={() => setShowUpgradeModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="w-16 h-16 mx-auto bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-400 border border-yellow-500/20">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+            
+            <h2 className="text-white text-2xl font-bold mb-3">Project Limit Reached</h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+              Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!
+            </p>
+
+            <button
+              onClick={() => setShowUpgradeModal(false)}
+              className="w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
