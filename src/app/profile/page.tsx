@@ -264,7 +264,10 @@ export default function ProfilePage() {
             )}
           </div>
           <div className="flex-grow">
-            <h1 className="text-white text-2xl font-black">{profile?.name}</h1>
+            <h1 className="text-white text-2xl font-black flex items-center gap-3">
+              {profile?.name}
+              <span className="text-[10px] font-bold bg-[#FF2E6E]/10 text-[#FF2E6E] border border-[#FF2E6E]/20 px-2 py-1 rounded-full tracking-wider uppercase">Free Plan</span>
+            </h1>
             <p className="text-gray-400 text-sm mt-0.5">{profile?.email}</p>
             {profile?.bio && <p className="text-gray-300 text-sm mt-2 max-w-md">{profile.bio}</p>}
             <div className="flex items-center gap-4 mt-3 flex-wrap">

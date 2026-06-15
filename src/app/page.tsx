@@ -665,7 +665,6 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 1 Project</li>
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> AI Website Generation</li>
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Visual Editor</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Mock Database Mode</li>
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Local Preview</li>
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 1 Website Deployment</li>
                     <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Community Support</li>
@@ -673,7 +672,13 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => setShowPricingPopup(true)}
+                  onClick={() => {
+                    if (session) {
+                      window.location.href = "/dashboard";
+                    } else {
+                      openModal("signup");
+                    }
+                  }}
                   className="mt-8 w-full border border-white/[0.06] hover:border-white/20 text-white text-xs font-bold py-3 rounded-lg transition-all bg-white/[0.02]"
                 >
                   Start Building

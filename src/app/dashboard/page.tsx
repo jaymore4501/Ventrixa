@@ -54,6 +54,10 @@ export default function Dashboard() {
   }, [session]);
 
   const handleCreateProject = () => {
+    if (projects.length >= 1) {
+      alert("Free Plan users can only create 1 website for now. Premium plans are coming soon!");
+      return;
+    }
     router.push("/dashboard/wizard");
   };
 
