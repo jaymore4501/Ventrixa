@@ -655,15 +655,20 @@ export default function LandingPage() {
               <div className="p-8 flex flex-col h-full text-left justify-between border border-white/[0.04]">
                 <div>
                   <h3 className="text-white text-lg font-bold">Free Sandbox</h3>
-                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">Configure blueprints and explore layout editors locally.</p>
+                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">Perfect for exploring Ventrixa and building your first AI-powered website.</p>
                   <div className="mt-6 flex items-baseline gap-1 text-white">
                     <span className="text-3xl font-extrabold">$0</span>
                     <span className="text-gray-500 text-xs font-semibold">/ month</span>
                   </div>
                   <ul className="mt-8 space-y-3.5 text-xs text-gray-400">
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 1 Sandbox project blueprint</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Local mock visual workspace</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> `localhost` simulation preview</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 1 Project</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> AI Website Generation</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Visual Editor</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Mock Database Mode</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Local Preview</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 1 Website Deployment</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Community Support</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Download 1 Project ZIP Export</li>
                   </ul>
                 </div>
                 <button
@@ -691,24 +696,28 @@ export default function LandingPage() {
                   Most Popular
                 </div>
                 <div>
-                  <h3 className="text-white text-lg font-bold">Creator Suite</h3>
-                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">Vibrant HSL color palettes and live edge domain connections.</p>
+                  <h3 className="text-white text-lg font-bold flex items-center gap-2">Pro Builder <span className="text-yellow-400">⭐</span></h3>
+                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">For freelancers, startups, and growing businesses.</p>
                   <div className="mt-6 flex items-baseline gap-1 text-white">
-                    <span className="text-3xl font-extrabold">$49</span>
+                    <span className="text-3xl font-extrabold">$19</span>
                     <span className="text-gray-500 text-xs font-semibold">/ month</span>
                   </div>
                   <ul className="mt-8 space-y-3.5 text-xs text-gray-400">
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Unlimited websites blueprints</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> HSL dynamically hashed colors</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Custom domain configurations</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> SSL edge encryption keys</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Up to 10 Projects</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> AI Regenerations</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Cloud Database Storage</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Up to 10 Website Deployments</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Custom Domains</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> SEO Configuration</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Export Any Project as Next.js ZIP</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Deployment Management Dashboard</li>
                   </ul>
                 </div>
                 <button
                   onClick={() => openModal()}
                   className="mt-8 w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-xs font-bold py-3 rounded-lg transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
                 >
-                  Unlock Creator Suite
+                  Upgrade to Pro
                 </button>
               </div>
             </BorderGlow>
@@ -726,16 +735,21 @@ export default function LandingPage() {
               <div className="p-8 flex flex-col h-full text-left justify-between border border-white/[0.04]">
                 <div>
                   <h3 className="text-white text-lg font-bold">Agency OS</h3>
-                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">Dedicated contractor SLA levels and collaborative workspaces.</p>
+                  <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">Built for agencies managing multiple clients and websites.</p>
                   <div className="mt-6 flex items-baseline gap-1 text-white">
-                    <span className="text-3xl font-extrabold">$149</span>
+                    <span className="text-3xl font-extrabold">$79</span>
                     <span className="text-gray-500 text-xs font-semibold">/ month</span>
                   </div>
                   <ul className="mt-8 space-y-3.5 text-xs text-gray-400">
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Multi-seat agency log lists</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Whitelabel templates exports</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Custom database backups</li>
-                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> 24/7 Priority support lines</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Unlimited Projects</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Unlimited Deployments</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Unlimited Custom Domains</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Remove Ventrixa Branding</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Priority AI Processing</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Version History & Rollbacks</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Premium Website Templates</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Priority Support</li>
+                    <li className="flex items-center gap-2.5"><Check className="w-4.5 h-4.5 text-[#FF2E6E] flex-shrink-0" /> Early Access to New Features</li>
                   </ul>
                 </div>
                 <button
