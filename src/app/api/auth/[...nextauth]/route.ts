@@ -1,11 +1,21 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/lib/mongodb";
 import { User } from "@/models/schemas";
 
 export const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
+    }),
     CredentialsProvider({
       name: "Email & Password",
       credentials: {
@@ -49,7 +59,7 @@ export const authOptions = {
         console.time("[AUTH] BcryptCompare");
         const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
         console.timeEnd("[AUTH] BcryptCompare");
-        
+
         console.timeEnd("[AUTH] Total");
 
         if (!isPasswordCorrect) {
@@ -71,10 +81,40 @@ export const authOptions = {
   },
 
   callbacks: {
-    async jwt({ token, user }: any) {
+    async signIn({ user, account, profile }: any) {
+      if (account?.provider === "google" || account?.provider === "github") {
+        try {
+          await connectDB();
+          const existingUser = await User.findOne({ email: user.email });
+          if (!existingUser) {
+            await User.create({
+              name: user.name,
+              email: user.email,
+              image: user.image,
+              provider: account.provider,
+            });
+          }
+          return true;
+        } catch (error) {
+          console.error("Error during OAuth sign-in:", error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account }: any) {
       if (user) {
         token.id = user.id;
         token.image = user.image;
+      }
+      // Ensure OAuth users get their DB ObjectId
+      if (account?.provider === "google" || account?.provider === "github") {
+        await connectDB();
+        const dbUser = await User.findOne({ email: token.email });
+        if (dbUser) {
+          token.id = dbUser._id.toString();
+          token.image = dbUser.image;
+        }
       }
       return token;
     },

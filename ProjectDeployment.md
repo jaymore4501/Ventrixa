@@ -50,6 +50,19 @@ NEXTAUTH_SECRET=ventrixa-secret-key-dev-only
 NEXTAUTH_URL=http://localhost:3000
 
 # ==========================================
+# OAuth Providers Configuration
+# ==========================================
+# Google: Create OAuth Client ID in Google Cloud Console
+# Set Redirect URI: https://yourdomain.com/api/auth/callback/google
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# GitHub: Create OAuth App in GitHub Developer Settings
+# Set Callback URL: https://yourdomain.com/api/auth/callback/github
+GITHUB_ID=
+GITHUB_SECRET=
+
+# ==========================================
 # AI Compilation Engine Configurations
 # ==========================================
 # OpenAI API Key (Required for remote ChatGPT models generation)
