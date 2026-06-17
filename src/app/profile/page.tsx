@@ -23,6 +23,7 @@ interface UserProfile {
   websiteUrl?: string;
   provider: string;
   createdAt: string;
+  plan?: string;
 }
 
 interface Project {
@@ -49,7 +50,7 @@ export default function ProfilePage() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   const handleCreateProject = () => {
-    if (projects.length >= 1) {
+    if ((!session?.user?.plan || session?.user?.plan === "free") && projects.length >= 1) {
       setShowUpgradeModal(true);
       return;
     }
@@ -275,7 +276,17 @@ export default function ProfilePage() {
           <div className="flex-grow">
             <h1 className="text-white text-2xl font-black flex items-center gap-3">
               {profile?.name}
-              <span className="text-[10px] font-bold bg-[#FF2E6E]/10 text-[#FF2E6E] border border-[#FF2E6E]/20 px-2 py-1 rounded-full tracking-wider uppercase">Free Plan</span>
+              <span 
+                className={`text-[10px] font-bold px-2 py-1 rounded-full tracking-wider uppercase border ${
+                  profile?.plan === 'pro' 
+                    ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' 
+                    : profile?.plan === 'agency'
+                    ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                    : 'bg-[#FF2E6E]/10 text-[#FF2E6E] border-[#FF2E6E]/20'
+                }`}
+              >
+                {profile?.plan === 'pro' ? 'Pro Plan' : profile?.plan === 'agency' ? 'Agency Plan' : 'Free Plan'}
+              </span>
             </h1>
             <p className="text-gray-400 text-sm mt-0.5">{profile?.email}</p>
             {profile?.bio && <p className="text-gray-300 text-sm mt-2 max-w-md">{profile.bio}</p>}
@@ -604,7 +615,9 @@ export default function ProfilePage() {
             
             <h2 className="text-white text-2xl font-bold mb-3">Project Limit Reached</h2>
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
-              Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!
+              {(!session?.user?.plan || session?.user?.plan === "free") 
+                ? "Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!" 
+                : "You have reached your project limit."}
             </p>
 
             <button

@@ -26,6 +26,7 @@ import {
   LayoutDashboard,
   LogOut,
 } from "lucide-react";
+import confetti from "canvas-confetti";
 import LightRays from "@/components/reactbits/LightRays";
 import ShinyText from "@/components/reactbits/ShinyText";
 import LogoLoop from "@/components/reactbits/LogoLoop";
@@ -44,13 +45,16 @@ function NavAvatar({ session }: { session: any }) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black text-white flex-shrink-0 hover:scale-105 transition-transform"
+        className="relative w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black text-white flex-shrink-0 hover:scale-105 transition-transform"
         style={{ background: "linear-gradient(135deg, #FF2E6E, #9d174d)", boxShadow: "0 0 14px rgba(255,46,110,0.35)" }}
       >
         {session?.user?.image ? (
           <img src={session.user.image} alt="" className="w-full h-full rounded-xl object-cover" />
         ) : (
           initials
+        )}
+        {session?.user?.plan === "pro" && (
+          <div className="absolute -bottom-1.5 -right-1.5 bg-gradient-to-r from-purple-500 to-[#FF2E6E] text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md border border-[#12141c] shadow-[0_0_8px_rgba(255,46,110,0.6)]">PRO</div>
         )}
       </button>
 
@@ -94,7 +98,52 @@ export default function LandingPage() {
   const { data: session, status } = useSession();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPricingPopup, setShowPricingPopup] = useState(false);
+  const [showComingSoonPopup, setShowComingSoonPopup] = useState(false);
   const [activeTab, setActiveTab] = useState<"signin" | "signup">("signin");
+
+  // GitHub Star Pro Unlock State
+  const [githubUsername, setGithubUsername] = useState("");
+  const [verifyingStar, setVerifyingStar] = useState(false);
+  const [starError, setStarError] = useState("");
+  const [starSuccess, setStarSuccess] = useState(false);
+
+  const handleVerifyStar = async () => {
+    if (status !== "authenticated") {
+      setShowPricingPopup(false);
+      setShowAuthModal(true);
+      return;
+    }
+    if (!githubUsername.trim()) {
+      setStarError("Please enter your GitHub username.");
+      return;
+    }
+
+    setVerifyingStar(true);
+    setStarError("");
+    try {
+      const res = await fetch("/api/verify-github-star", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ githubUsername: githubUsername.trim() })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setStarError(data.error || "Verification failed");
+      } else {
+        setStarSuccess(true);
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#FF2E6E', '#8b5cf6', '#ec4899', '#ffffff']
+        });
+      }
+    } catch (e: any) {
+      setStarError("Network error. Please try again.");
+    } finally {
+      setVerifyingStar(false);
+    }
+  };
 
   // Sign In state
   const [siEmail, setSiEmail] = useState("");
@@ -621,7 +670,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <button
-                  onClick={() => setShowPricingPopup(true)}
+                  onClick={() => setShowComingSoonPopup(true)}
                   className="mt-8 w-full border border-white/[0.06] hover:border-white/20 text-white text-xs font-bold py-3 rounded-lg transition-all bg-white/[0.02]"
                 >
                   Contact Sales
@@ -642,6 +691,139 @@ export default function LandingPage() {
           <p>&copy; {new Date().getFullYear()} Ventrixa Inc. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* GitHub Star Pro Unlock Modal */}
+      {showPricingPopup && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.8)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowPricingPopup(false); }}
+        >
+          <div
+            className="relative w-full max-w-4xl text-left overflow-hidden flex flex-col md:flex-row"
+            style={{
+              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
+              border: "1px solid rgba(255,46,110,0.4)",
+              borderRadius: "20px",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 50px rgba(255,46,110,0.15)",
+              backdropFilter: "blur(24px)",
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-[#FF2E6E] to-purple-600 animate-pulse z-10" />
+            
+            <button
+              onClick={() => setShowPricingPopup(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-20"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Left Pane */}
+            <div className="md:w-5/12 p-8 md:p-10 border-b md:border-b-0 md:border-r border-white/[0.06] bg-black/20 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-[#FF2E6E]/10 rounded-full blur-[60px]" />
+              
+              <div className="relative z-10">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FF2E6E]/20 to-purple-600/20 border border-[#FF2E6E]/30 flex items-center justify-center text-[#FF2E6E] mb-6">
+                  <Sparkles className="w-7 h-7" />
+                </div>
+                <h2 className="text-white text-3xl font-extrabold leading-tight">Unlock <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E6E] to-purple-500">Pro Builder</span></h2>
+                <p className="text-[#FF2E6E] text-xs font-black tracking-widest uppercase mt-3">FREE FOR EARLY SUPPORTERS</p>
+                
+                <p className="text-gray-400 text-sm leading-relaxed mt-6 mb-4">
+                  We're giving away our <strong className="text-white">Pro Tier ($19/mo)</strong> completely free to our early GitHub supporters!
+                </p>
+                <ul className="space-y-2.5 text-xs text-gray-300 font-medium bg-black/20 p-4 rounded-xl border border-white/5">
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#FF2E6E]" /> Up to 10 Projects</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#FF2E6E]" /> AI Regenerations</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#FF2E6E]" /> Cloud Database Storage</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#FF2E6E]" /> Custom Domains & SEO</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#FF2E6E]" /> Export Any Project as Next.js ZIP</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Right Pane */}
+            <div className="md:w-7/12 p-8 md:p-10 relative">
+              {starSuccess ? (
+                <div className="flex flex-col items-center justify-center h-full text-center space-y-5 animate-in fade-in zoom-in duration-500">
+                  <div className="w-24 h-24 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center text-green-400 mb-2 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+                    <Check className="w-12 h-12 stroke-[3]" />
+                  </div>
+                  <h3 className="text-3xl font-extrabold text-white">Pro Unlocked!</h3>
+                  <p className="text-gray-400 max-w-sm">Thank you for supporting Ventrixa. Your account has been permanently upgraded to the Pro Builder tier.</p>
+                  <button onClick={() => setShowPricingPopup(false)} className="mt-6 px-8 py-3.5 bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]">
+                    Continue to Dashboard
+                  </button>
+                </div>
+              ) : (
+                <div className="h-full flex flex-col justify-center">
+                  <h3 className="text-white text-xl font-bold mb-6">How to unlock your free upgrade:</h3>
+
+                  <div className="space-y-6 relative">
+                    {/* Connecting line */}
+                    <div className="absolute left-4 top-4 bottom-4 w-px bg-white/10" />
+
+                    <div className="flex gap-5 items-start relative z-10">
+                      <div className="w-8 h-8 rounded-full bg-[#12141c] flex items-center justify-center text-gray-400 font-bold shrink-0 border border-white/20 shadow-[0_0_10px_rgba(0,0,0,0.5)]">1</div>
+                      <div className="pt-1">
+                        <h4 className="text-white font-semibold mb-1">Create or Sign in to GitHub</h4>
+                        <p className="text-gray-500 text-xs mb-2">You need a GitHub account to star the repository.</p>
+                        <a href="https://github.com/login" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-xs font-semibold bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-md border border-white/10">
+                          Sign in to GitHub <ChevronRight className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-5 items-start relative z-10">
+                      <div className="w-8 h-8 rounded-full bg-[#12141c] flex items-center justify-center text-gray-400 font-bold shrink-0 border border-white/20 shadow-[0_0_10px_rgba(0,0,0,0.5)]">2</div>
+                      <div className="pt-1">
+                        <h4 className="text-white font-semibold mb-1">Star our Repository</h4>
+                        <p className="text-gray-500 text-xs mb-2">Click the star button on our project page.</p>
+                        <a href="https://github.com/jaymore4501/Ventrixa.git" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[#FF2E6E] hover:text-[#FF2E6E]/80 transition-colors text-xs font-semibold bg-[#FF2E6E]/10 hover:bg-[#FF2E6E]/20 px-3 py-1.5 rounded-md border border-[#FF2E6E]/30">
+                          ⭐ https://github.com/jaymore4501/Ventrixa.git
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-5 items-start relative z-10">
+                      <div className="w-8 h-8 rounded-full bg-[#12141c] flex items-center justify-center text-[#FF2E6E] font-bold shrink-0 border border-[#FF2E6E]/50 shadow-[0_0_10px_rgba(255,46,110,0.2)]">3</div>
+                      <div className="flex-1 pt-1">
+                        <h4 className="text-white font-semibold mb-2">Verify your Username</h4>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value={githubUsername}
+                            onChange={(e) => setGithubUsername(e.target.value)}
+                            placeholder="e.g. torvalds"
+                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FF2E6E]/50 focus:ring-1 focus:ring-[#FF2E6E]/50 transition-all placeholder:text-gray-600 shadow-inner"
+                          />
+                        </div>
+                        {starError && <p className="text-red-400 text-xs mt-2.5 font-medium">{starError}</p>}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleVerifyStar}
+                    disabled={verifyingStar}
+                    className="mt-8 w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(255,46,110,0.3)] disabled:opacity-70 flex items-center justify-center gap-2 text-sm"
+                  >
+                    {verifyingStar ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verify Star & Upgrade to Pro"}
+                  </button>
+                  
+                  {status !== "authenticated" && (
+                    <div className="mt-4 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-center">
+                      <p className="text-xs text-orange-400 font-semibold">
+                        Note: You will be asked to sign in to Ventrixa first if you haven't already.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Premium Auth Modal — Sign In / Sign Up */}
       {showAuthModal && (
@@ -923,11 +1105,11 @@ export default function LandingPage() {
       )}
 
       {/* Coming Soon Pricing Popup */}
-      {showPricingPopup && (
+      {showComingSoonPopup && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center p-4"
           style={{ background: "rgba(0,0,0,0.8)" }}
-          onClick={(e) => { if (e.target === e.currentTarget) setShowPricingPopup(false); }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowComingSoonPopup(false); }}
         >
           <div
             className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
@@ -941,7 +1123,7 @@ export default function LandingPage() {
             <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,46,110,0.5), rgba(255,255,255,0.2), rgba(255,46,110,0.5), transparent)" }} />
 
             <button
-              onClick={() => setShowPricingPopup(false)}
+              onClick={() => setShowComingSoonPopup(false)}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
             >
               <X className="w-4 h-4" />
@@ -957,7 +1139,7 @@ export default function LandingPage() {
             </p>
 
             <button
-              onClick={() => setShowPricingPopup(false)}
+              onClick={() => setShowComingSoonPopup(false)}
               className="w-full bg-gradient-to-r from-[#FF2E6E] to-[#9d174d] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(255,46,110,0.25)]"
             >
               Got it

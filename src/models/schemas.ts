@@ -12,6 +12,9 @@ export interface IUser extends Document {
   location?: string;
   websiteUrl?: string;
   emailVerified?: Date;
+  plan: "free" | "pro" | "agency";
+  githubStarred: boolean;
+  githubUsername?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +30,9 @@ const UserSchema = new Schema<IUser>(
     location: { type: String, default: "" },
     websiteUrl: { type: String, default: "" },
     emailVerified: { type: Date },
+    plan: { type: String, enum: ["free", "pro", "agency"], default: "free" },
+    githubStarred: { type: Boolean, default: false },
+    githubUsername: { type: String, unique: true, sparse: true },
   },
   { timestamps: true }
 );

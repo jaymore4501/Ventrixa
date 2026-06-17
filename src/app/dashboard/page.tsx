@@ -58,7 +58,7 @@ export default function Dashboard() {
   }, [session]);
 
   const handleCreateProject = () => {
-    if (projects.length >= 1) {
+    if ((!session?.user?.plan || session?.user?.plan === "free") && projects.length >= 1) {
       setShowUpgradeModal(true);
       return;
     }
@@ -292,7 +292,9 @@ export default function Dashboard() {
             
             <h2 className="text-white text-2xl font-bold mb-3">Project Limit Reached</h2>
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
-              Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!
+              {(!session?.user?.plan || session?.user?.plan === "free") 
+                ? "Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!" 
+                : "You have reached your project limit."}
             </p>
 
             <button

@@ -71,6 +71,7 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           image: user.image || null,
+          plan: user.plan || "free",
         };
       },
     }),
@@ -106,14 +107,16 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.image = user.image;
+        token.plan = user.plan;
       }
-      // Ensure OAuth users get their DB ObjectId
+      // Ensure OAuth users get their DB ObjectId and latest plan
       if (account?.provider === "google" || account?.provider === "github") {
         await connectDB();
         const dbUser = await User.findOne({ email: token.email });
         if (dbUser) {
           token.id = dbUser._id.toString();
           token.image = dbUser.image;
+          token.plan = dbUser.plan || "free";
         }
       }
       return token;
@@ -122,6 +125,7 @@ export const authOptions = {
       if (session.user) {
         session.user.id = token.id;
         session.user.image = token.image;
+        session.user.plan = token.plan;
       }
       return session;
     },
