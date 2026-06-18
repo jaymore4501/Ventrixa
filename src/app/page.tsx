@@ -95,7 +95,7 @@ function NavAvatar({ session }: { session: any }) {
 }
 
 export default function LandingPage() {
-  const { data: session, status, update } = useSession();
+  const { data: session, status } = useSession();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPricingPopup, setShowPricingPopup] = useState(false);
   const [showComingSoonPopup, setShowComingSoonPopup] = useState(false);
@@ -131,7 +131,6 @@ export default function LandingPage() {
         setStarError(data.error || "Verification failed");
       } else {
         setStarSuccess(true);
-        await update(); // Force JWT refresh so session.user.plan becomes "pro" immediately
         confetti({
           particleCount: 150,
           spread: 80,

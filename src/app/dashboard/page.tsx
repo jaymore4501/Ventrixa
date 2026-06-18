@@ -58,9 +58,7 @@ export default function Dashboard() {
   }, [session]);
 
   const handleCreateProject = () => {
-    const isPro = session?.user?.plan === "pro";
-    const limit = isPro ? 10 : 1;
-    if (projects.length >= limit) {
+    if ((!session?.user?.plan || session?.user?.plan === "free") && projects.length >= 1) {
       setShowUpgradeModal(true);
       return;
     }
@@ -295,8 +293,8 @@ export default function Dashboard() {
             <h2 className="text-white text-2xl font-bold mb-3">Project Limit Reached</h2>
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
               {(!session?.user?.plan || session?.user?.plan === "free") 
-                ? "Free Plan users can only create 1 website. Unlock Pro Builder Mode for up to 10 projects, custom domains, SEO configuration, and more!" 
-                : "You have reached your Pro Builder limit of 10 projects. Please contact enterprise support for unlimited usage."}
+                ? "Free Plan users can only create 1 website for now. Premium plans offering unlimited projects are rolling out very soon!" 
+                : "You have reached your project limit."}
             </p>
 
             <button

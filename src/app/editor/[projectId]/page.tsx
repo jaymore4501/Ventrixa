@@ -142,16 +142,11 @@ export default function VisualEditor({
   const router = useRouter();
 
   // Project and Site Configurations
-  const isPro = session?.user?.plan === "pro";
-
   const [project, setProject] = useState<any>(null);
   const [website, setWebsite] = useState<any>(null);
   const [pages, setPages] = useState<any[]>([]);
   const [activePage, setActivePage] = useState<any>(null);
   const [sections, setSections] = useState<any[]>([]);
-
-  const [showProUpgradeModal, setShowProUpgradeModal] = useState(false);
-  const [proUpgradeFeature, setProUpgradeFeature] = useState("");
 
   // Editor states
   const [loading, setLoading] = useState(true);
@@ -879,57 +874,6 @@ export default function VisualEditor({
         </div>
       )}
 
-      {/* Pro Upgrade Modal */}
-      {showProUpgradeModal && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          style={{ background: "rgba(0,0,0,0.8)" }}
-          onClick={(e) => { if (e.target === e.currentTarget) setShowProUpgradeModal(false); }}
-        >
-          <div
-            className="relative w-full max-w-md text-center p-8 overflow-hidden rounded-2xl"
-            style={{
-              background: "linear-gradient(135deg, rgba(18,20,28,0.98) 0%, rgba(22,14,20,0.98) 100%)",
-              border: "1px solid rgba(139,92,246,0.3)",
-              boxShadow: "0 25px 60px rgba(0,0,0,0.7), 0 0 40px rgba(139,92,246,0.1)",
-              backdropFilter: "blur(24px)",
-            }}
-          >
-            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.6), rgba(255,255,255,0.3), rgba(139,92,246,0.6), transparent)" }} />
-            
-            <button
-              onClick={() => setShowProUpgradeModal(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all z-10"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="w-16 h-16 mx-auto bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400 border border-purple-500/20">
-              <Sparkles className="w-8 h-8" />
-            </div>
-            
-            <h2 className="text-white text-2xl font-bold mb-3">Pro Feature Locked</h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              <span className="font-semibold text-purple-300">{proUpgradeFeature}</span> is exclusively available for Pro Builder Mode users.
-            </p>
-            
-            <ul className="text-left space-y-2 text-xs font-medium text-gray-300 mb-8 mx-auto inline-block">
-              <li className="flex items-center gap-2"><Check className="w-4 h-4 text-purple-400" /> Up to 10 Projects & Deployments</li>
-              <li className="flex items-center gap-2"><Check className="w-4 h-4 text-purple-400" /> Advanced AI Regenerations</li>
-              <li className="flex items-center gap-2"><Check className="w-4 h-4 text-purple-400" /> Custom Domains & SEO Setup</li>
-              <li className="flex items-center gap-2"><Check className="w-4 h-4 text-purple-400" /> Cloud Database Storage</li>
-            </ul>
-
-            <Link
-              href="/profile"
-              className="block w-full bg-gradient-to-r from-purple-600 to-[#FF2E6E] hover:brightness-110 text-white text-sm font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(139,92,246,0.25)]"
-            >
-              Upgrade to Pro
-            </Link>
-          </div>
-        </div>
-      )}
-
       {/* Visual Editor Header */}
       <header className="border-b border-border bg-background px-6 py-3 flex items-center justify-between z-30">
         <div className="flex items-center gap-4">
@@ -1044,34 +988,6 @@ export default function VisualEditor({
                 <Download className="w-3.5 h-3.5" /> Download ZIP
               </>
             )}
-          </button>
-
-          <button
-            onClick={() => {
-              if (!isPro) {
-                setProUpgradeFeature("Custom Domains & SEO Configuration");
-                setShowProUpgradeModal(true);
-              } else {
-                setDialogState({ isOpen: true, title: "Coming Soon", message: "Advanced SEO & Domain Configuration dashboard is rolling out to Pro users soon!", type: "alert" });
-              }
-            }}
-            className="border border-border hover:border-amber-500 text-heading text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors bg-[#212632]/40 cursor-pointer"
-          >
-            <Globe className="w-3.5 h-3.5" /> SEO & Domains
-          </button>
-
-          <button
-            onClick={() => {
-              if (!isPro) {
-                setProUpgradeFeature("AI Layout Regeneration");
-                setShowProUpgradeModal(true);
-              } else {
-                setDialogState({ isOpen: true, title: "Coming Soon", message: "AI Regenerate capabilities are currently being calibrated for Pro users.", type: "alert" });
-              }
-            }}
-            className="border border-border hover:border-cyan-500 text-heading text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors bg-[#212632]/40 cursor-pointer"
-          >
-            <Sparkles className="w-3.5 h-3.5" /> AI Regenerate
           </button>
 
           <button
