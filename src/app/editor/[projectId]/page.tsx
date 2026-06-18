@@ -142,7 +142,6 @@ export default function VisualEditor({
   const router = useRouter();
 
   // Project and Site Configurations
-  const { data: session } = useSession();
   const isPro = session?.user?.plan === "pro";
 
   const [project, setProject] = useState<any>(null);
